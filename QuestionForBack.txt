@@ -1,0 +1,9 @@
+﻿1 Quizlərdə təkrar suallar düşəcəkmi?
+2 Bazadan seçiləcəksə random mu olacaq yoxsa admin özümü seçəcək?
+3 Textle bağlı suallar nə qədər olacaq?
+4 Sullar ümumi mi olacaq yoxsa hər modul üçün ayrı eyni zamanda da ümumi mi?
+6 Çətinlik səviyyəsinə görə necə olacaq? (məsələn 5 sana 10 orda 5 çətin)
+7 Riyaziyyatla İngilis dili bir yerdə mi veriləcək yox ayrı ayrı mı?
+8 Hər fənn üzrə sual sayı nə qədər olacaq?
+9 Cavablarda şəkil mi olacaq?
+ 
