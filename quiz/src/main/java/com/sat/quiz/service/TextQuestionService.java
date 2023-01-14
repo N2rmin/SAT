@@ -2,7 +2,6 @@ package com.sat.quiz.service;
 
 import com.sat.quiz.dto.requestDto.TextQuestionRequestDto;
 import com.sat.quiz.dto.responseDto.TextQuestionResponseDto;
-import com.sat.quiz.entity.Selection;
 import com.sat.quiz.entity.TextQuestion;
 import lombok.Data;
 import lombok.NoArgsConstructor;
