@@ -72,6 +72,7 @@ public class mapper {
     public static AnswerResponseDto answerToAnswerResponseDto(Answer answer){
         AnswerResponseDto answerResponseDto = new AnswerResponseDto();
         answerResponseDto.setAnswerText(answer.getAnswerText());
+        answerResponseDto.setId(answer.getId());
         answerResponseDto.setIsTrue(answer.getIsTrue());
         answerResponseDto.setStatus(answer.getStatus());
         answerResponseDto.setQuestionText(Collections.singletonList(answer.getQuestion().getQuestionText()));
@@ -148,6 +149,7 @@ public class mapper {
         textQuestionResponseDto.setTextContent(textQuestion.getTextContent());
         Map<Long,String> questionText=new HashMap<>();
         Map<Long,String> answerText=new HashMap<>();
+        Map<Long,Object> questionAnswer= new HashMap<>();
 
         List<Question> questions=textQuestion.getQuestions();
         for (Question question:questions){
@@ -155,6 +157,7 @@ public class mapper {
             for (Answer answer:question.getAnswers()){
                 answerText.put(answer.getId(),answer.getAnswerText());
             }
+            questionAnswer.put(question.getId(),answerText);
             textQuestionResponseDto.setAnswerText(answerText);
         }
 

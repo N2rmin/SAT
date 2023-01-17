@@ -14,4 +14,6 @@ public class TextQuestionResponseDto {
 
     private Map<Long,String> answerText;
 
+    private Map<String,Object> questionAnswer;
+
 }

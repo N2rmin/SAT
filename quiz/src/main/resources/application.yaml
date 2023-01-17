@@ -1,15 +1,16 @@
 spring:
   jpa:
     properties:
-      javax:
-        persistence:
-          validation:
-            mode: none
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto:  update
   datasource:
-    url: jdbc:h2:./devdb
-    username: sa
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/SAT
+    username: postgres
+    password: Azmiu2015
+
 
 
 server:

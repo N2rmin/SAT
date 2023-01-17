@@ -4,6 +4,7 @@ import com.sat.quiz.dto.requestDto.QuestionRequestDto;
 import com.sat.quiz.dto.responseDto.QuestionResponseDto;
 import com.sat.quiz.service.QuestionService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
