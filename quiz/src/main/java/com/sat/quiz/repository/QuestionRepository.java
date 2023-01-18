@@ -14,7 +14,7 @@ public interface QuestionRepository extends JpaRepository<Question,Long> {
     List<Question> findAllByTextQuestionIdNotNull();
 
 
-    @EntityGraph(attributePaths = {"answers"})
+//    @EntityGraph(attributePaths = {"answers"})
     List<Question> findAll();
 
 }

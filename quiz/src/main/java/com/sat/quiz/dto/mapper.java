@@ -102,12 +102,12 @@ public class mapper {
 
         }
         Map<Long,String> answerText=new HashMap<>();
-        List<Answer> answers=question.getAnswers();
+       /* List<Answer> answers=question.getAnswers();
         for (Answer answer:answers){
             answerText.put(answer.getId(),answer.getAnswerText());
         }
         questionResponseDto.setAnswerText(answerText);
-
+*/
         return questionResponseDto;
 
     }
@@ -127,10 +127,10 @@ public class mapper {
         textQuestionResponseDto.setStatus(textQuestion.isStatus());
         textQuestionResponseDto.setTextContent(textQuestion.getTextContent());
         Map<Long,String> questionText=new HashMap<>();
-        List<Question> questions=textQuestion.getQuestions();
-        for (Question question:questions){
-            questionText.put(question.getId(),question.getQuestionText());
-        }
+//        List<Question> questions=textQuestion.getQuestions();
+//        for (Question question:questions){
+//            questionText.put(question.getId(),question.getQuestionText());
+//        }
 
         textQuestionResponseDto.setQuestions(questionText);
         return textQuestionResponseDto;
@@ -158,30 +158,30 @@ public class mapper {
         Map<Object,Object> questionAnswer= new HashMap<>();
         HashMap<String, HashMap<Long, Object>> outerMap = new HashMap<String, HashMap<Long, Object>>();
 
-        List<Question> questions=textQuestion.getQuestions();
-        for (Question question:questions){
-          //  questionText.put(question.getId(),question.getQuestionText());
-            questionResponseDto.setQuestionText(question.getQuestionText());
-           questionResponseDto.setId(question.getId());
-           // QuestionResponseDto questionResponseDto =new QuestionResponseDto(question.getId(), question.getQuestionText());
-            for (Answer answer:question.getAnswers()){
-                answerText.put(answer.getId(),answer.getAnswerText());
-
-            }
-            questionAnswer.put(questionResponseDto ,answerText);
-            System.out.println(answerText.size());
-
-            textQuestionResponseDto.setQuestionAnswer(questionAnswer);
-            System.out.println(textQuestionResponseDto.getQuestionAnswer());
-            answerText.clear();
-
-            System.out.println("After Clear");
-            System.out.println(answerText.size());
-            System.out.println(textQuestionResponseDto.getQuestionAnswer());
-            //  textQuestionResponseDto.setAnswerText(answerText);
-            //answerText.clear();
-
-        }
+//        List<Question> questions=textQuestion.getQuestions();
+//        for (Question question:questions){
+//          //  questionText.put(question.getId(),question.getQuestionText());
+//            questionResponseDto.setQuestionText(question.getQuestionText());
+//           questionResponseDto.setId(question.getId());
+//           // QuestionResponseDto questionResponseDto =new QuestionResponseDto(question.getId(), question.getQuestionText());
+//            for (Answer answer:question.getAnswers()){
+//                answerText.put(answer.getId(),answer.getAnswerText());
+//
+//            }
+//            questionAnswer.put(questionResponseDto ,answerText);
+//            System.out.println(answerText.size());
+//
+//            textQuestionResponseDto.setQuestionAnswer(questionAnswer);
+//            System.out.println(textQuestionResponseDto.getQuestionAnswer());
+//            answerText.clear();
+//
+//            System.out.println("After Clear");
+//            System.out.println(answerText.size());
+//            System.out.println(textQuestionResponseDto.getQuestionAnswer());
+//            //  textQuestionResponseDto.setAnswerText(answerText);
+//            //answerText.clear();
+//
+//        }
 
 
 

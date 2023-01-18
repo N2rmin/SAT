@@ -20,7 +20,7 @@ public class Answer extends BaseEntity{
     private Boolean isTrue;
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "question_id")
+    @JoinColumn(name = "question_id", referencedColumnName = "id" )
     private Question question;
 
 

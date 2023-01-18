@@ -58,7 +58,7 @@ private final QuestionRepository questionRepository;
     @GetMapping("testText")
     public List<TextQuestionDtoTest> getTextQuestionsTest(){
         List<TextQuestionDtoTest> list = new ArrayList<>();
-        //System.out.println(questionRepository.findAll());
+
         textQuestionRepository.findAll().stream().forEach(obj->{
             list.add(modelMapper.map(obj,TextQuestionDtoTest.class));
         });
