@@ -1,6 +1,7 @@
 package com.sat.quiz.service;
 
 import com.sat.quiz.dto.requestDto.QuestionRequestDto;
+import com.sat.quiz.dto.responseDto.ExamResponseDto;
 import com.sat.quiz.dto.responseDto.QuestionResponseDto;
 import com.sat.quiz.entity.Question;
 
@@ -18,6 +19,8 @@ public interface QuestionService {
     QuestionResponseDto updateQuestion(Long id, QuestionRequestDto requestDto);
 
     Boolean deleteQuestion(Long id);
+
+    ExamResponseDto questionToExamResponseDto(Long moduleId);
 
     List<QuestionResponseDto> getQuestionWithModule(Long id);
 

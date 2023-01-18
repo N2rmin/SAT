@@ -1,6 +1,7 @@
 package com.sat.quiz.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class TextQuestion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Lob
+
     private String textContent;
     private boolean status;
 

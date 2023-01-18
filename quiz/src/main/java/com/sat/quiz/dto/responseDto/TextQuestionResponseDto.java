@@ -1,5 +1,6 @@
 package com.sat.quiz.dto.responseDto;
 
+import com.sat.quiz.entity.Question;
 import lombok.Data;
 
 import java.util.Map;
@@ -12,8 +13,10 @@ public class TextQuestionResponseDto {
 
     private Map<Long,String> questions;
 
+
+
     private Map<Long,String> answerText;
 
-    private Map<String,Object> questionAnswer;
+    private Map<Object,Object> questionAnswer;
 
 }

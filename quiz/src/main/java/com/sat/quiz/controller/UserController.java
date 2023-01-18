@@ -1,7 +1,9 @@
 package com.sat.quiz.controller;
 
 
+import com.sat.quiz.dto.requestDto.UserRequestDto;
 import com.sat.quiz.dto.responseDto.QuestionResponseDto;
+import com.sat.quiz.dto.responseDto.UserResponseDto;
 import com.sat.quiz.entity.Users;
 import com.sat.quiz.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,7 @@ public class UserController {
     @CrossOrigin
     @PostMapping("/api/1.0/users")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Users> createUser(@Valid @RequestBody Users user){
+    public ResponseEntity createUser(@Valid @RequestBody UserRequestDto user){
 
         userService.save(user);
         return  ResponseEntity.ok(user);

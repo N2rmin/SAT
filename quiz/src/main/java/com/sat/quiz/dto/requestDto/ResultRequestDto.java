@@ -14,5 +14,5 @@ public class ResultRequestDto {
     private Long quizId;
 
     private Boolean status;
-    private String username;
+    private Long examinerId;
 }

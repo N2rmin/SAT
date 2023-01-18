@@ -2,6 +2,7 @@ package com.sat.quiz.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class Question extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Lob
+
     private String questionText;
     private boolean status;
 

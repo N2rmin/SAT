@@ -20,5 +20,7 @@ public class ResultResponseDto {
     //
     // private List<String> textQuestionContext;
     private List<String> quizNames;
+    private List<String> examinerNames;
+
     //private Map<Long,String> answerText;
 }

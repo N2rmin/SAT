@@ -13,7 +13,6 @@ import com.sat.quiz.repository.ResultRepository;
 import com.sat.quiz.service.ModuleService;
 import com.sat.quiz.service.ResultService;
 import com.sat.quiz.service.QuizService;
-import com.sat.quiz.validation.UniqueUsernameValidator;
 import lombok.RequiredArgsConstructor;
 import javax.validation.ConstraintViolationException;
 import org.modelmapper.ModelMapper;
@@ -68,7 +67,7 @@ public class ResultServiceImpl implements ResultService {
         }
 
 result.setScore(score);
-        result.setUsername(requestDto.getUsername());
+     //   result.setUsername(requestDto.getUsername());
 
         System.out.println(score);
         //TextResult textResult= textResultService.getTextResultSelf(requestDto.getTextResultId());

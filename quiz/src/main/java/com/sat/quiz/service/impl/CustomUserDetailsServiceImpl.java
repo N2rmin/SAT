@@ -1,6 +1,5 @@
 package com.sat.quiz.service.impl;
 
-import com.sat.quiz.entity.User;
 import com.sat.quiz.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

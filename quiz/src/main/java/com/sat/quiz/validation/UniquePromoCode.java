@@ -7,11 +7,11 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
-@Constraint(validatedBy = {UniqueUsernameValidator.class} )
+@Constraint(validatedBy = {UniquePromoCodeValidator.class} )
 @Target({ ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface UniqueUsername {
-    String message() default "{Eyni username olmaz}";
+public @interface UniquePromoCode {
+    String message() default "{Eyni PromoCode olmaz}";
 
     Class<?>[] groups() default {};
 

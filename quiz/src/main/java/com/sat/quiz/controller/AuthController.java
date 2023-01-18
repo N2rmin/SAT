@@ -2,6 +2,7 @@ package com.sat.quiz.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import com.sat.quiz.dto.requestDto.UserRequestDto;
 import com.sat.quiz.entity.Users;
 import com.sat.quiz.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +20,10 @@ public class AuthController {
     UserRepository userRepository;
 
 
-    @PostMapping("/api/1.0/auth")
-    ResponseEntity<?> handleAuthentication( Users user){
+    @PostMapping("/auth")
+    ResponseEntity<?> handleAuthentication( UserRequestDto user){
 
-
-
-
-
-
-
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok("Ok");
 
     }
 }

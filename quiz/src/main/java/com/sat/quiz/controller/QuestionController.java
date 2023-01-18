@@ -1,24 +1,37 @@
 package com.sat.quiz.controller;
 
+import com.sat.quiz.dto.QuestionDtoTest;
+import com.sat.quiz.dto.TextQuestionDtoTest;
 import com.sat.quiz.dto.requestDto.QuestionRequestDto;
+import com.sat.quiz.dto.responseDto.ExamResponseDto;
 import com.sat.quiz.dto.responseDto.QuestionResponseDto;
+import com.sat.quiz.entity.TextQuestion;
+import com.sat.quiz.repository.QuestionRepository;
+import com.sat.quiz.repository.TextQuestionRepository;
 import com.sat.quiz.service.QuestionService;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/questions")
+@RequiredArgsConstructor
 public class QuestionController {
     private final QuestionService questionService;
 
-    public QuestionController(QuestionService questionService) {
-        this.questionService = questionService;
-    }
+    private final ModelMapper modelMapper;
+
+    private final TextQuestionRepository textQuestionRepository;
+private final QuestionRepository questionRepository;
+
+
 
     @PostMapping
     public ResponseEntity<QuestionResponseDto> addQuestion(@RequestBody QuestionRequestDto requestDto){
@@ -32,6 +45,25 @@ public class QuestionController {
         return ResponseEntity.ok(questionResponseDtos);
     }
 
+    @GetMapping("test")
+    public List<QuestionDtoTest> getQuestionsTest(){
+        List<QuestionDtoTest> list = new ArrayList<>();
+        //System.out.println(questionRepository.findAll());
+        questionRepository.findAll().stream().forEach(obj->{
+            list.add(modelMapper.map(obj,QuestionDtoTest.class));
+        });
+        return list;
+    }
+
+    @GetMapping("testText")
+    public List<TextQuestionDtoTest> getTextQuestionsTest(){
+        List<TextQuestionDtoTest> list = new ArrayList<>();
+        //System.out.println(questionRepository.findAll());
+        textQuestionRepository.findAll().stream().forEach(obj->{
+            list.add(modelMapper.map(obj,TextQuestionDtoTest.class));
+        });
+        return list;
+    }
     @GetMapping("/withAnswers")
     public ResponseEntity<List<QuestionResponseDto>> getQuestionsWithAnswer(){
         List<QuestionResponseDto> questionResponseDtos =questionService.getQuestionsWithAnswer();
@@ -42,6 +74,13 @@ public class QuestionController {
     public ResponseEntity<List<QuestionResponseDto>> getQuestionWithModule(@PathVariable("moduleId") Long id){
         List<QuestionResponseDto> questionResponseDtos = questionService.getQuestionWithModule(id);
         return ResponseEntity.ok(questionResponseDtos);
+    }
+
+
+    @GetMapping("/questionToExamResponseDto/{moduleId}")
+    public ResponseEntity<ExamResponseDto>questionToExamResponseDto(@PathVariable("moduleId") Long id){
+        questionService.questionToExamResponseDto(id);
+        return ResponseEntity.ok( questionService.questionToExamResponseDto(id));
     }
 
     @GetMapping("/getWithAnswer/{id}")

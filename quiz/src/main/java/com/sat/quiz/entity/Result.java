@@ -1,6 +1,5 @@
 package com.sat.quiz.entity;
 
-import com.sat.quiz.validation.UniqueUsername;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.UniqueElements;
@@ -17,8 +16,6 @@ public class Result {
     private Long id;
 
 
-    @UniqueUsername
-    private String username;
 
     private int score;
 
@@ -29,5 +26,9 @@ public class Result {
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "quiz_id")
     private Quiz quiz;
+
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "examiner_id")
+    private Examiner examiner;
 
 }

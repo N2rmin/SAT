@@ -1,6 +1,5 @@
 package com.sat.quiz.service.impl;
 
-import com.sat.quiz.entity.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;

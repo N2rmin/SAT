@@ -2,7 +2,9 @@ package com.sat.quiz.service.impl;
 
 import com.sat.quiz.dto.mapper;
 import com.sat.quiz.dto.requestDto.QuestionRequestDto;
+import com.sat.quiz.dto.responseDto.ExamResponseDto;
 import com.sat.quiz.dto.responseDto.QuestionResponseDto;
+import com.sat.quiz.dto.responseDto.TextQuestionResponseDto;
 import com.sat.quiz.entity.*;
 import com.sat.quiz.entity.Module;
 import com.sat.quiz.repository.QuestionRepository;
@@ -14,8 +16,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.LongFunction;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -148,6 +150,75 @@ public class QuestionServiceImpl implements QuestionService {
         }
         return false;
     }
+
+
+    public  ExamResponseDto   questionToExamResponseDto(Long moduleId) {
+ExamResponseDto examResponseDto=new ExamResponseDto();
+        System.out.println("H0");
+
+        List<Question> allQuestion = StreamSupport
+                .stream(questionRepository.findByModuleId(moduleId).spliterator(), false)
+                .collect(Collectors.toList());
+        System.out.println("H1");
+
+        System.out.println("H3");
+
+        Map<Long, Object> Exam = new HashMap<>();
+        Map<Long, String> textQuestion = new HashMap<>();
+
+        //List<Question> questionWithtext;
+
+        Set<Long> textIds = new HashSet<Long>();
+
+        List<Question> questionWithText = StreamSupport
+                .stream(questionRepository.findAllByTextQuestionIdNotNull().spliterator(), false).collect(Collectors.toList());
+
+        for (Question question : questionWithText) {
+            System.out.println(question.getTextQuestion().getId());
+            textIds.add(question.getTextQuestion().getId());
+        }
+        ;
+        System.out.println(textIds);
+
+        for (Long id : textIds) {
+            List<Question> questions = StreamSupport
+                    .stream(questionRepository.findByTextQuestionId(id).spliterator(), false)
+                    .collect(Collectors.toList());
+
+            System.out.println("121");
+            Exam.put(id,questions);
+            System.out.println("23432");
+        }
+        System.out.println("23542332");
+        System.out.println(Exam.keySet());
+        examResponseDto.setQuestionAnswer(Exam);
+        return examResponseDto;
+    }
+
+
+
+//        TextQuestionResponseDto textQuestionResponseDto= new TextQuestionResponseDto();
+//        textQuestionResponseDto.setId(textQuestion.getId());
+//        textQuestionResponseDto.setStatus(textQuestion.isStatus());
+//        textQuestionResponseDto.setTextContent(textQuestion.getTextContent());
+//        Map<Long,String> questionText=new HashMap<>();
+//        Map<Long,String> answerText=new HashMap<>();
+//        Map<Long,Object> questionAnswer= new HashMap<>();
+//
+//        List<Question> questions=textQuestion.getQuestions();
+//        for (Question question:questions){
+//            questionText.put(question.getId(),question.getQuestionText());
+//            for (Answer answer:question.getAnswers()){
+//                answerText.put(answer.getId(),answer.getAnswerText());
+//            }
+//            questionAnswer.put(question.getId(),answerText);
+//            textQuestionResponseDto.setAnswerText(answerText);
+//        }
+//
+//        textQuestionResponseDto.setQuestions(questionText);
+
+
+
 
 
 }
