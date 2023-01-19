@@ -14,7 +14,7 @@ public class mapper {
         ModuleResponseDto moduleResponseDto=new ModuleResponseDto();
         moduleResponseDto.setId(module.getId());
         moduleResponseDto.setName(module.getName());
-        moduleResponseDto.setSectionNames(Collections.singletonList(module.getSection().getName()));
+       // moduleResponseDto.setSectionNames(Collections.singletonList(module.getSection().getName()));
     return moduleResponseDto;
     }
 

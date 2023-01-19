@@ -8,7 +8,7 @@ spring:
     show-sql: true
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/SAT
+    url: jdbc:postgresql://localhost:5435/SAT
     username: postgres
     password: Azmiu2015
 

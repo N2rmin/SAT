@@ -1,5 +1,6 @@
 package com.sat.quiz.service.impl;
 
+import com.sat.quiz.dto.TextQuestionDtoTest;
 import com.sat.quiz.dto.mapper;
 import com.sat.quiz.dto.requestDto.ModuleRequestDto;
 import com.sat.quiz.dto.responseDto.ModuleResponseDto;
@@ -14,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,12 +43,18 @@ public class ModuleServiceImpl implements ModuleService {
 
     }
 
+
+
+
     @Override
     public List<ModuleResponseDto> getModules() {
-        List<Module> modules=StreamSupport
-                .stream(moduleRepository.findAll().spliterator(),false)
-                .collect(Collectors.toList());
-        return mapper.moduleToModuleResponseDtos(modules);
+
+        List<ModuleResponseDto> list = new ArrayList<>();
+
+       moduleRepository.findAll().stream().forEach(obj->{
+          list.add(modelMapper.map(obj,ModuleResponseDto.class));
+      });
+        return list;
 
 
     }

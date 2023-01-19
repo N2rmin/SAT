@@ -8,5 +8,5 @@ import java.util.List;
 public class ModuleResponseDto {
     private Long id;
     private String name;
-    private List<String> sectionNames;
+    private SectionResponseDto section;
 }
