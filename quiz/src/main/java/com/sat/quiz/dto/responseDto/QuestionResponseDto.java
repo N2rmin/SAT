@@ -1,5 +1,9 @@
 package com.sat.quiz.dto.responseDto;
 
+import com.sat.quiz.dto.AnswerDtoTest;
+import com.sat.quiz.entity.Answer;
+import com.sat.quiz.entity.Quiz;
+import com.sat.quiz.entity.TextQuestion;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,16 +19,13 @@ public class QuestionResponseDto {
     private Long id;
     private String questionText;
   //  private Long textQuestionId;
-    private List<String> moduleNames;
-    private List<String> textQuestion;
+  //  private Module module;
+//    private TextQuestionResponseDto textQuestion;
     //
     // private List<String> textQuestionContext;
-    private List<String> quizNames;
-    private Map<Long,String> answerText;
+  //  private QuizResponseDto quiz;
+    private List<AnswerResponseDto> answers;
 
 
-    public QuestionResponseDto(Long id, String questionText) {
-        this.id=id;
-        this.questionText=questionText;
-    }
+
 }

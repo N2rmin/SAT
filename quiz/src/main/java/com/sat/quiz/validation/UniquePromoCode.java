@@ -3,10 +3,6 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
-import java.lang.annotation.*;
-
 @Constraint(validatedBy = {UniquePromoCodeValidator.class} )
 @Target({ ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)

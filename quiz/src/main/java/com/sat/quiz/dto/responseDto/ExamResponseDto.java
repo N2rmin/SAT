@@ -7,8 +7,9 @@ import java.util.Map;
 
 @Data
 public class ExamResponseDto {
-    private Map<Long,Object> questionAnswer;
+    private List<TextQuestionResponseDto> textQuestionResponseDtos;
 
+    private List<QuestionResponseDto> questionResponseDtos;
 
     //private Map<Long,String> answerText;
 }

@@ -9,6 +9,6 @@ public class SectionResponseDto {
     private Long id;
     private String name;
     private boolean status;
-    private List<ModuleResponseDto> ModuleResponseDto;
+    //private List<ModuleResponseDto> modules;
 
 }

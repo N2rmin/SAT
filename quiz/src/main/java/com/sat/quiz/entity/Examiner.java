@@ -14,8 +14,11 @@ public class Examiner extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @UniquePromoCode
+
+
+    @Column(unique=true)
     private String promoCode;
+
     private String name;
 
     private String lastName;

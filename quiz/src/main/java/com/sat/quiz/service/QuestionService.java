@@ -3,6 +3,7 @@ package com.sat.quiz.service;
 import com.sat.quiz.dto.requestDto.QuestionRequestDto;
 import com.sat.quiz.dto.responseDto.ExamResponseDto;
 import com.sat.quiz.dto.responseDto.QuestionResponseDto;
+import com.sat.quiz.dto.responseDto.TextQuestionResponseDto;
 import com.sat.quiz.entity.Question;
 
 import java.util.List;
@@ -13,6 +14,8 @@ public interface QuestionService {
 
     List<QuestionResponseDto> getQuestions();
 
+    List<QuestionResponseDto> getQuizAndModuleQuestions(Long quizId, Long moduleId);
+
     QuestionResponseDto getQuestion(Long id);
 
     Question getQuestionSelf(Long id);
@@ -20,13 +23,15 @@ public interface QuestionService {
 
     Boolean deleteQuestion(Long id);
 
-    ExamResponseDto questionToExamResponseDto(Long moduleId);
+    List<TextQuestionResponseDto> findAll();
 
-    List<QuestionResponseDto> getQuestionWithModule(Long id);
+    //  ExamResponseDto getQuizAndModuleQuestions(Long moduleId);
 
-    List<QuestionResponseDto> getQuestionWithText(Long id);
+   // List<QuestionResponseDto> getQuestionWithModule(Long id);
 
-    QuestionResponseDto getQuestionWithAnswer(Long id);
+  //  List<QuestionResponseDto> getQuestionWithText(Long id);
 
-    List<QuestionResponseDto> getQuestionsWithAnswer();
+ //   QuestionResponseDto getQuestionWithAnswer(Long id);
+
+  //  List<QuestionResponseDto> getQuestionsWithAnswer();
 }

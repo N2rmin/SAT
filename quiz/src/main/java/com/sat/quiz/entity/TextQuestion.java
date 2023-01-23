@@ -1,6 +1,7 @@
 package com.sat.quiz.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.hibernate.annotations.*;
 
@@ -25,8 +26,10 @@ public class TextQuestion {
     private boolean status;
 
 
+
     @OneToMany(mappedBy = "textQuestion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
     //@Fetch(value = FetchMode.SUBSELECT)
 //    @IndexColumn(name="text_question_id")
-    private List<Question> questions=new ArrayList<>();
+    private Set<Question> questions=new HashSet<>();
 }

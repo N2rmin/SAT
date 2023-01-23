@@ -1,7 +1,9 @@
 package com.sat.quiz.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -18,6 +20,8 @@ public class Answer extends BaseEntity{
     private Boolean status;
 
     private Boolean isTrue;
+
+
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id", referencedColumnName = "id" )

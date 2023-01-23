@@ -23,7 +23,9 @@ public interface TextQuestionService {
 
     Boolean deleteTextQuestion(Long id);
 
-    TextQuestionResponseDto getTextQuestionWithQuestion(Long id);
+    List<TextQuestionResponseDto> getTextQuestionsWithQuizAndModule(Long quizId,Long moduleId);
 
-    List<TextQuestionResponseDto> getTextQuestionsWithQuestion();
+  //  TextQuestionResponseDto getTextQuestionWithQuestion(Long id);
+
+ //   List<TextQuestionResponseDto> getTextQuestionsWithQuestion();
 }

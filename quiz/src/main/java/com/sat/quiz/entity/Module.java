@@ -17,6 +17,6 @@ public class Module extends BaseEntity{
     private boolean status;
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "section_id")
+    @JoinColumn(name = "section_id", referencedColumnName = "id")
     private Section section;
 }

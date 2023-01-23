@@ -63,7 +63,7 @@ public class ModuleServiceImpl implements ModuleService {
     @Override
     public ModuleResponseDto getModule(Long id) {
         Module module= getModuleSelf(id);
-        return mapper.moduleToModuleResponseDto(module);
+        return modelMapper.map(module,ModuleResponseDto.class);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class ModuleServiceImpl implements ModuleService {
         module.setName(requestDto.getName());
         module.setStatus(requestDto.isStatus());
         moduleRepository.save(module);
-        return mapper.moduleToModuleResponseDto(module);
+        return modelMapper.map(module,ModuleResponseDto.class);
     }
 
     @Override

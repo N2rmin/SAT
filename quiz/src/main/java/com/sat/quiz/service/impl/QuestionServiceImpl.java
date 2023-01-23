@@ -2,12 +2,14 @@ package com.sat.quiz.service.impl;
 
 import com.sat.quiz.dto.mapper;
 import com.sat.quiz.dto.requestDto.QuestionRequestDto;
+import com.sat.quiz.dto.responseDto.AnswerResponseDto;
 import com.sat.quiz.dto.responseDto.ExamResponseDto;
 import com.sat.quiz.dto.responseDto.QuestionResponseDto;
 import com.sat.quiz.dto.responseDto.TextQuestionResponseDto;
 import com.sat.quiz.entity.*;
 import com.sat.quiz.entity.Module;
 import com.sat.quiz.repository.QuestionRepository;
+import com.sat.quiz.repository.TextQuestionRepository;
 import com.sat.quiz.service.ModuleService;
 import com.sat.quiz.service.QuestionService;
 import com.sat.quiz.service.QuizService;
@@ -58,57 +60,76 @@ public class QuestionServiceImpl implements QuestionService {
        // question.setTextQuestionId(requestDto.getTextQuestionId());
         question.setQuestionText(requestDto.getQuestionText());
         question.setStatus(requestDto.isStatus());
-        return mapper.questionToQuestionResponseDto(questionRepository.save(question) );
+        questionRepository.save(question);
+        return modelMapper.map(question, QuestionResponseDto.class);
 
     }
 
     @Override
     public List<QuestionResponseDto> getQuestions() {
-        List<Question> questions=StreamSupport
-                .stream(questionRepository.findAll().spliterator(),false)
-                .collect(Collectors.toList());
-        return mapper.questionToQuestionResponseDtos(questions);
+
+        List<QuestionResponseDto> list = new ArrayList<>();
+
+        questionRepository.findAll().stream().forEach(obj->{
+            list.add(modelMapper.map(obj,QuestionResponseDto.class));
+        });
+
+        return list;
 
 
     }
 
     @Override
-    public List<QuestionResponseDto> getQuestionsWithAnswer() {
-        List<Question> questions=StreamSupport
-                .stream(questionRepository.findAll().spliterator(),false)
-                .collect(Collectors.toList());
-        return mapper.questionWithAnswerResponseDtos(questions);
+    public List<QuestionResponseDto> getQuizAndModuleQuestions(Long quizId, Long moduleId) {
+
+        List<QuestionResponseDto> list = new ArrayList<>();
+
+        questionRepository.findAllByQuizIdAndModuleIdAndTextQuestionIsNull(quizId,moduleId).stream().forEach(obj->{
+            list.add(modelMapper.map(obj,QuestionResponseDto.class));
+        });
+
+        return list;
+
+
     }
 
-    @Override
-    public List<QuestionResponseDto> getQuestionWithModule(Long id) {
-        List<Question> questions=StreamSupport
-                .stream(questionRepository.findByModuleId(id).spliterator(),false)
-                .collect(Collectors.toList());
-        return mapper.questionToQuestionResponseDtos(questions);
-    }
+//    @Override
+//    public List<QuestionResponseDto> getQuestionsWithAnswer() {
+//        List<Question> questions=StreamSupport
+//                .stream(questionRepository.findAll().spliterator(),false)
+//                .collect(Collectors.toList());
+//        return mapper.questionWithAnswerResponseDtos(questions);
+//    }
 
-    @Override
-    public List<QuestionResponseDto> getQuestionWithText(Long id) {
-        List<Question> questions=StreamSupport
-                .stream(questionRepository.findByTextQuestionId(id).spliterator(),false)
-                .collect(Collectors.toList());
-        return mapper.questionToQuestionResponseDtos(questions);
-    }
+//    @Override
+//    public List<QuestionResponseDto> getQuestionWithModule(Long id) {
+//        List<Question> questions=StreamSupport
+//                .stream(questionRepository.findByModuleId(id).spliterator(),false)
+//                .collect(Collectors.toList());
+//        return mapper.questionToQuestionResponseDtos(questions);
+//    }
 
-    @Override
-    public QuestionResponseDto getQuestionWithAnswer(Long id) {
-        Question question= getQuestionSelf(id);
-        //return mapper.questionToQuestionResponseDto(question);
-        return mapper.questionWithAnswerResponseDto(question);
-    }
+//    @Override
+//    public List<QuestionResponseDto> getQuestionWithText(Long id) {
+//        List<Question> questions=StreamSupport
+//                .stream(questionRepository.findByTextQuestionId(id).spliterator(),false)
+//                .collect(Collectors.toList());
+//        return mapper.questionToQuestionResponseDtos(questions);
+//    }
+
+//    @Override
+//    public QuestionResponseDto getQuestionWithAnswer(Long id) {
+//        Question question= getQuestionSelf(id);
+//        //return mapper.questionToQuestionResponseDto(question);
+//        return mapper.questionWithAnswerResponseDto(question);
+//    }
 
 
 
     @Override
     public QuestionResponseDto getQuestion(Long id) {
         Question question= getQuestionSelf(id);
-        return mapper.questionToQuestionResponseDto(question);
+        return modelMapper.map(question, QuestionResponseDto.class);
     }
 
     @Override
@@ -137,7 +158,7 @@ public class QuestionServiceImpl implements QuestionService {
         question.setQuestionText(requestDto.getQuestionText());
         question.setStatus(requestDto.isStatus());
         questionRepository.save(question);
-        return mapper.questionToQuestionResponseDto(question);
+        return modelMapper.map(question, QuestionResponseDto.class);
     }
 
     @Override
@@ -149,6 +170,13 @@ public class QuestionServiceImpl implements QuestionService {
             return true;
         }
         return false;
+    }
+
+    private final TextQuestionRepository textQuestionRepository;
+    @Override
+    public List<TextQuestionResponseDto> findAll() {
+        TextQuestionResponseDto textQuestionResponseDto=modelMapper.map(textQuestionRepository.findById(1L).get(),TextQuestionResponseDto.class);
+        return List.of(textQuestionResponseDto);
     }
 
 
@@ -191,7 +219,7 @@ ExamResponseDto examResponseDto=new ExamResponseDto();
         }
         System.out.println("23542332");
         System.out.println(Exam.keySet());
-        examResponseDto.setQuestionAnswer(Exam);
+       // examResponseDto.setQuestionAnswer(Exam);
         return examResponseDto;
     }
 

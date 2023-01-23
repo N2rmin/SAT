@@ -1,5 +1,6 @@
 package com.sat.quiz.dto.responseDto;
 
+import com.sat.quiz.entity.Question;
 import lombok.Data;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public class AnswerResponseDto {
     private String answerText;
     private Boolean status;
     private Boolean isTrue;
-    private List<String> questionText;
+   // private Question question;
     //private List<String> textQuestionContext;
     
 

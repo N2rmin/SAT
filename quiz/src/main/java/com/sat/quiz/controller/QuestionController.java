@@ -5,6 +5,7 @@ import com.sat.quiz.dto.TextQuestionDtoTest;
 import com.sat.quiz.dto.requestDto.QuestionRequestDto;
 import com.sat.quiz.dto.responseDto.ExamResponseDto;
 import com.sat.quiz.dto.responseDto.QuestionResponseDto;
+import com.sat.quiz.dto.responseDto.TextQuestionResponseDto;
 import com.sat.quiz.entity.TextQuestion;
 import com.sat.quiz.repository.QuestionRepository;
 import com.sat.quiz.repository.TextQuestionRepository;
@@ -49,8 +50,18 @@ private final QuestionRepository questionRepository;
     public List<QuestionDtoTest> getQuestionsTest(){
         List<QuestionDtoTest> list = new ArrayList<>();
         //System.out.println(questionRepository.findAll());
-        questionRepository.findAll().stream().forEach(obj->{
+        questionRepository.findAllByTextQuestionIdNotNull().stream().forEach(obj->{
             list.add(modelMapper.map(obj,QuestionDtoTest.class));
+        });
+        return list;
+    }
+
+    @GetMapping("testTextwith/{quizId}/{moduleId}")
+    public List<TextQuestionDtoTest> getTextwithQuestionsTest(@PathVariable("quizId") Long quizId,@PathVariable("moduleId") Long moduleId){
+        List<TextQuestionDtoTest> list = new ArrayList<>();
+
+        textQuestionRepository.findAllByQuestions_QuizIdAndQuestions_ModuleId(quizId,moduleId).stream().forEach(obj->{
+            list.add(modelMapper.map(obj,TextQuestionDtoTest.class));
         });
         return list;
     }
@@ -64,36 +75,47 @@ private final QuestionRepository questionRepository;
         });
         return list;
     }
-    @GetMapping("/withAnswers")
-    public ResponseEntity<List<QuestionResponseDto>> getQuestionsWithAnswer(){
-        List<QuestionResponseDto> questionResponseDtos =questionService.getQuestionsWithAnswer();
-        return ResponseEntity.ok(questionResponseDtos);
-    }
 
-    @GetMapping("/getByModuleId/{moduleId}")
-    public ResponseEntity<List<QuestionResponseDto>> getQuestionWithModule(@PathVariable("moduleId") Long id){
-        List<QuestionResponseDto> questionResponseDtos = questionService.getQuestionWithModule(id);
-        return ResponseEntity.ok(questionResponseDtos);
+    @GetMapping("testText1")
+    public List<TextQuestionResponseDto> getTextQuestionsTest1(){
+
+
+        return questionService.findAll();
     }
 
 
-    @GetMapping("/questionToExamResponseDto/{moduleId}")
-    public ResponseEntity<ExamResponseDto>questionToExamResponseDto(@PathVariable("moduleId") Long id){
-        questionService.questionToExamResponseDto(id);
-        return ResponseEntity.ok( questionService.questionToExamResponseDto(id));
-    }
 
-    @GetMapping("/getWithAnswer/{id}")
-    public ResponseEntity <QuestionResponseDto> getQuestionWithAnswer(@PathVariable("id") Long id){
-        QuestionResponseDto questionResponseDtos = questionService.getQuestionWithAnswer(id);
-        return ResponseEntity.ok(questionResponseDtos);
-    }
 
-    @GetMapping("/getByTextId/{textId}")
-    public ResponseEntity<List<QuestionResponseDto>> getQuestionWithText(@PathVariable("textId") Long id){
-        List<QuestionResponseDto> questionResponseDtos = questionService.getQuestionWithText(id);
-        return ResponseEntity.ok(questionResponseDtos);
-    }
+//    @GetMapping("/withAnswers")
+//    public ResponseEntity<List<QuestionResponseDto>> getQuestionsWithAnswer(){
+//        List<QuestionResponseDto> questionResponseDtos =questionService.getQuestionsWithAnswer();
+//        return ResponseEntity.ok(questionResponseDtos);
+//    }
+//
+//    @GetMapping("/getByModuleId/{moduleId}")
+//    public ResponseEntity<List<QuestionResponseDto>> getQuestionWithModule(@PathVariable("moduleId") Long id){
+//        List<QuestionResponseDto> questionResponseDtos = questionService.getQuestionWithModule(id);
+//        return ResponseEntity.ok(questionResponseDtos);
+//    }
+//
+//
+//    @GetMapping("/questionToExamResponseDto/{moduleId}")
+//    public ResponseEntity<ExamResponseDto>questionToExamResponseDto(@PathVariable("moduleId") Long id){
+//        questionService.questionToExamResponseDto(id);
+//        return ResponseEntity.ok( questionService.questionToExamResponseDto(id));
+//    }
+//
+//    @GetMapping("/getWithAnswer/{id}")
+//    public ResponseEntity <QuestionResponseDto> getQuestionWithAnswer(@PathVariable("id") Long id){
+//        QuestionResponseDto questionResponseDtos = questionService.getQuestionWithAnswer(id);
+//        return ResponseEntity.ok(questionResponseDtos);
+//    }
+//
+//    @GetMapping("/getByTextId/{textId}")
+//    public ResponseEntity<List<QuestionResponseDto>> getQuestionWithText(@PathVariable("textId") Long id){
+//        List<QuestionResponseDto> questionResponseDtos = questionService.getQuestionWithText(id);
+//        return ResponseEntity.ok(questionResponseDtos);
+//    }
 
     @GetMapping("{id}")
     public ResponseEntity<QuestionResponseDto> getQuestion(@PathVariable("id") Long id){

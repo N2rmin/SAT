@@ -3,6 +3,7 @@ package com.sat.quiz.service.impl;
 import com.sat.quiz.dto.mapper;
 import com.sat.quiz.dto.requestDto.TextQuestionRequestDto;
 import com.sat.quiz.dto.requestDto.TextQuestionRequestDto;
+import com.sat.quiz.dto.responseDto.QuestionResponseDto;
 import com.sat.quiz.dto.responseDto.TextQuestionResponseDto;
 import com.sat.quiz.dto.responseDto.TextQuestionResponseDto;
 import com.sat.quiz.entity.Question;
@@ -14,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -37,9 +39,28 @@ public class TextQuestionServiceImpl implements TextQuestionService {
 
     @Override
     public List<TextQuestionResponseDto> getTextQuestions() {
-        List<TextQuestion> textQuestions=textQuestionRepository.findAll();
-        List<TextQuestionResponseDto> textQuestionResponseDtos=textQuestions.stream().map(textQuestion -> modelMapper.map(textQuestion,TextQuestionResponseDto.class)).collect(Collectors.toList());
-        return textQuestionResponseDtos;
+
+
+        List<TextQuestionResponseDto> list = new ArrayList<>();
+
+        textQuestionRepository.findAll().stream().forEach(obj->{
+            list.add(modelMapper.map(obj,TextQuestionResponseDto.class));
+        });
+
+        return list;
+    }
+
+    @Override
+    public List<TextQuestionResponseDto> getTextQuestionsWithQuizAndModule(Long quizId,Long moduleId) {
+
+
+        List<TextQuestionResponseDto> list = new ArrayList<>();
+
+        textQuestionRepository.findAllByQuestions_QuizIdAndQuestions_ModuleId(quizId,moduleId).stream().forEach(obj->{
+            list.add(modelMapper.map(obj,TextQuestionResponseDto.class));
+        });
+
+        return list;
     }
 
     @Override
@@ -81,20 +102,20 @@ public class TextQuestionServiceImpl implements TextQuestionService {
         return false;
     }
 
-    @Override
-    public TextQuestionResponseDto getTextQuestionWithQuestion(Long id) {
-        TextQuestion textQuestion= getTextQuestionSelf(id);
-        //return mapper.questionToQuestionResponseDto(question);
-        return mapper.textQuestionToTextQuestionWithAnswerResponseDto(textQuestion);
-    }
+//    @Override
+//    public TextQuestionResponseDto getTextQuestionWithQuestion(Long id) {
+//        TextQuestion textQuestion= getTextQuestionSelf(id);
+//        //return mapper.questionToQuestionResponseDto(question);
+//        return mapper.textQuestionToTextQuestionWithAnswerResponseDto(textQuestion);
+//    }
 
-    @Override
-    public List<TextQuestionResponseDto> getTextQuestionsWithQuestion() {
-        List<TextQuestion> textQuestions= StreamSupport
-                .stream(textQuestionRepository.findAll().spliterator(),false)
-                .collect(Collectors.toList());
-        return mapper.textQuestionToTextQuestionWithAnswerResponseDtos(textQuestions);
-    }
+//    @Override
+//    public List<TextQuestionResponseDto> getTextQuestionsWithQuestion() {
+//        List<TextQuestion> textQuestions= StreamSupport
+//                .stream(textQuestionRepository.findAll().spliterator(),false)
+//                .collect(Collectors.toList());
+//        return mapper.textQuestionToTextQuestionWithAnswerResponseDtos(textQuestions);
+//    }
 
 
 }

@@ -37,10 +37,10 @@ public class AnswerController {
         return ResponseEntity.ok(answerResponseDto);
     }
 
-    @GetMapping("getByQuestionId/{questionId}")
-    public ResponseEntity<List<AnswerResponseDto>> getAnswersWithQuestion(@PathVariable("questionId") Long id){
-        return ResponseEntity.ok(answerService.getAnswersWithQuestion(id));
-    }
+//    @GetMapping("getByQuestionId/{questionId}")
+//    public ResponseEntity<List<AnswerResponseDto>> getAnswersWithQuestion(@PathVariable("questionId") Long id){
+//        return ResponseEntity.ok(answerService.getAnswersWithQuestion(id));
+//    }
 
     @PutMapping("{id}")
     public ResponseEntity<AnswerResponseDto> updateAnswer(@PathVariable("id") Long id,

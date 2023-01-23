@@ -4,10 +4,8 @@ import com.sat.quiz.dto.mapper;
 import com.sat.quiz.dto.requestDto.ResultRequestDto;
 import com.sat.quiz.dto.responseDto.ModuleResponseDto;
 import com.sat.quiz.dto.responseDto.ResultResponseDto;
-import com.sat.quiz.entity.Answer;
+import com.sat.quiz.entity.*;
 import com.sat.quiz.entity.Module;
-import com.sat.quiz.entity.Result;
-import com.sat.quiz.entity.Quiz;
 import com.sat.quiz.repository.AnswerRepository;
 import com.sat.quiz.repository.ResultRepository;
 import com.sat.quiz.service.ModuleService;
@@ -35,6 +33,7 @@ public class ResultServiceImpl implements ResultService {
     private  final ResultRepository resultRepository;
     private final QuizService quizService;
 
+    private final ExaminerServiceImpl examinerService;
     private final AnswerRepository answerRepository;
 
 
@@ -51,6 +50,13 @@ public class ResultServiceImpl implements ResultService {
         Quiz quiz= quizService.getQuizSelf(requestDto.getQuizId());
         result.setQuiz(quiz);
 
+        if (requestDto.getExaminerId()==null){
+            throw  new IllegalArgumentException("result at least one examiner");
+        }
+
+        Examiner examiner= examinerService.getExaminerSelf(requestDto.getExaminerId());
+        result.setExaminer(examiner);
+
         int score =0;
         Long questionId;
         Long answerId;
@@ -66,7 +72,7 @@ public class ResultServiceImpl implements ResultService {
 
         }
 
-result.setScore(score);
+        result.setScore(score);
      //   result.setUsername(requestDto.getUsername());
 
         System.out.println(score);

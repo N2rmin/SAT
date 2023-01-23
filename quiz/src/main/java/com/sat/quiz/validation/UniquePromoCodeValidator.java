@@ -1,9 +1,7 @@
 package com.sat.quiz.validation;
 
 import com.sat.quiz.entity.Examiner;
-import com.sat.quiz.entity.Result;
 import com.sat.quiz.repository.ExaminerRepository;
-import com.sat.quiz.repository.ResultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
@@ -16,7 +14,10 @@ public class UniquePromoCodeValidator  implements ConstraintValidator<UniqueProm
 
     @Override
     public boolean isValid(String promoCode, ConstraintValidatorContext context) {
+        System.out.println("11111");
         Examiner examiner = examinerRepository.findByPromoCode(promoCode);
+        System.out.println("22222");
+
         return examiner == null;
     }
 }

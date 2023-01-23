@@ -19,5 +19,5 @@ public interface AnswerService {
 
     Boolean deleteAnswer(Long id);
 
-    List<AnswerResponseDto> getAnswersWithQuestion(Long id);
+   // List<AnswerResponseDto> getAnswersWithQuestion(Long id);
 }

@@ -3,6 +3,7 @@ package com.sat.quiz.service.impl;
 import com.sat.quiz.dto.mapper;
 import com.sat.quiz.dto.requestDto.AnswerRequestDto;
 import com.sat.quiz.dto.responseDto.AnswerResponseDto;
+import com.sat.quiz.dto.responseDto.ModuleResponseDto;
 import com.sat.quiz.entity.Module;
 import com.sat.quiz.entity.Answer;
 import com.sat.quiz.entity.Question;
@@ -16,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -43,33 +45,39 @@ public class AnswerServiceImpl implements AnswerService {
         answer.setAnswerText(requestDto.getAnswerText());
         answer.setStatus(requestDto.getStatus());
         answer.setIsTrue(requestDto.getIsTrue());
-        return mapper.answerToAnswerResponseDto(answerRepository.save(answer) );
+        answerRepository.save(answer);
+        return modelMapper.map(answer,AnswerResponseDto.class);
 
     }
 
     @Override
     public List<AnswerResponseDto> getAnswers() {
-        List<Answer> answers=StreamSupport
-                .stream(answerRepository.findAll().spliterator(),false)
-                .collect(Collectors.toList());
-        return mapper.answerToAnswerResponseDtos(answers);
+
+        List<AnswerResponseDto> list = new ArrayList<>();
+
+        answerRepository.findAll().stream().forEach(obj->{
+            list.add(modelMapper.map(obj,AnswerResponseDto.class));
+        });
+
+
+        return list;
 
 
     }
 
 
-    @Override
-    public List<AnswerResponseDto>  getAnswersWithQuestion(Long id) {
-        List<Answer> answers=StreamSupport
-                .stream(answerRepository.findByQuestionId(id).spliterator(),false)
-                .collect(Collectors.toList());
-        return mapper.answerToAnswerResponseDtos(answers);
-    }
+//    @Override
+//    public List<AnswerResponseDto>  getAnswersWithQuestion(Long id) {
+//        List<Answer> answers=StreamSupport
+//                .stream(answerRepository.findByQuestionId(id).spliterator(),false)
+//                .collect(Collectors.toList());
+//        return modelMapper.map(answers,AnswerResponseDto.class);
+//    }
 
     @Override
     public AnswerResponseDto getAnswer(Long id) {
         Answer answer= getAnswerSelf(id);
-        return mapper.answerToAnswerResponseDto(answer);
+        return modelMapper.map(answer,AnswerResponseDto.class);
     }
 
     @Override
@@ -91,7 +99,7 @@ public class AnswerServiceImpl implements AnswerService {
         answer.setStatus(requestDto.getStatus());
         answer.setIsTrue(requestDto.getIsTrue());
         answerRepository.save(answer);
-        return mapper.answerToAnswerResponseDto(answer);
+        return modelMapper.map(answer,AnswerResponseDto.class);
     }
 
     @Override

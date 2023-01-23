@@ -9,10 +9,7 @@ import org.hibernate.annotations.*;
 import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Data
@@ -36,11 +33,10 @@ public class Question extends BaseEntity{
     private Quiz quiz;
 
 
-
-    @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "question",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<Answer> answers=new HashSet<>();
+
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "text_question_id", referencedColumnName = "id" )

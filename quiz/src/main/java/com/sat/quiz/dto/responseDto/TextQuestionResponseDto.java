@@ -3,6 +3,7 @@ package com.sat.quiz.dto.responseDto;
 import com.sat.quiz.entity.Question;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Map;
 
 @Data
@@ -11,12 +12,9 @@ public class TextQuestionResponseDto {
     private String textContent;
     private boolean status;
 
-    private Map<Long,String> questions;
+    private List<QuestionResponseDto> questions;
 
 
-
-    private Map<Long,String> answerText;
-
-    private Map<Object,Object> questionAnswer;
+   // private Map<Object,Object> questionAnswer;
 
 }

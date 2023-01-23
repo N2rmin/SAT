@@ -31,22 +31,22 @@ public class TextQuestionController {
         List<TextQuestionResponseDto> textQuestionResponseDtos =textQuestionService.getTextQuestions();
         return ResponseEntity.ok(textQuestionResponseDtos);
     }
-    @GetMapping("/withQuestion")
-    public ResponseEntity<List<TextQuestionResponseDto>> getTextQuestionsWithQuestion(){
-        List<TextQuestionResponseDto> textQuestionResponseDtos =textQuestionService.getTextQuestionsWithQuestion();
-        return ResponseEntity.ok(textQuestionResponseDtos);
-    }
+//    @GetMapping("/withQuestion")
+//    public ResponseEntity<List<TextQuestionResponseDto>> getTextQuestionsWithQuestion(){
+//        List<TextQuestionResponseDto> textQuestionResponseDtos =textQuestionService.getTextQuestionsWithQuestion();
+//        return ResponseEntity.ok(textQuestionResponseDtos);
+//    }
 
     @GetMapping("{id}")
     public ResponseEntity<TextQuestionResponseDto> getTextQuestion(@PathVariable("id") Long id){
         TextQuestionResponseDto textQuestionResponseDto= textQuestionService.getTextQuestion(id);
         return ResponseEntity.ok(textQuestionResponseDto);
     }
-    @GetMapping("/withQuestion/{id}")
-    public ResponseEntity<TextQuestionResponseDto> getTextQuestionWithQuestion(@PathVariable("id") Long id){
-        TextQuestionResponseDto textQuestionResponseDto= textQuestionService.getTextQuestionWithQuestion(id);
-        return ResponseEntity.ok(textQuestionResponseDto);
-    }
+//    @GetMapping("/withQuestion/{id}")
+//    public ResponseEntity<TextQuestionResponseDto> getTextQuestionWithQuestion(@PathVariable("id") Long id){
+//        TextQuestionResponseDto textQuestionResponseDto= textQuestionService.getTextQuestionWithQuestion(id);
+//        return ResponseEntity.ok(textQuestionResponseDto);
+//    }
 
     @PutMapping("{id}")
     public ResponseEntity<TextQuestionResponseDto> updateTextQuestion(@PathVariable("id") Long id,
