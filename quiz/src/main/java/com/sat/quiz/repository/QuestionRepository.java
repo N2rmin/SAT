@@ -15,11 +15,13 @@ public interface QuestionRepository extends JpaRepository<Question,Long> {
     @EntityGraph(attributePaths = {"answers","module","module.section","quiz"})
     List<Question> findAllByTextQuestionIdNotNull();
 
+
+
     List<Question> findAllByTextQuestionIdIsNull();
 
 
     @EntityGraph(attributePaths = {"answers","module","module.section","quiz"})
-    List<Question> findAll();
+    List<Question> findAllByOrderByIdAsc();
 
     @EntityGraph(attributePaths = {"answers","module","module.section","quiz"})
     List<Question> findAllByQuizIdAndModuleIdAndTextQuestionIsNull(Long quizId,Long moduleId);

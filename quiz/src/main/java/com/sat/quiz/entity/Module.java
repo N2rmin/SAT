@@ -16,7 +16,7 @@ public class Module extends BaseEntity{
     private String name;
     private boolean status;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "section_id", referencedColumnName = "id")
     private Section section;
 }

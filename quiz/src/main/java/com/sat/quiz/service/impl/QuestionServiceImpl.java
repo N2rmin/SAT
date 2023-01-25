@@ -70,7 +70,7 @@ public class QuestionServiceImpl implements QuestionService {
 
         List<QuestionResponseDto> list = new ArrayList<>();
 
-        questionRepository.findAll().stream().forEach(obj->{
+        questionRepository.findAllByOrderByIdAsc().stream().forEach(obj->{
             list.add(modelMapper.map(obj,QuestionResponseDto.class));
         });
 

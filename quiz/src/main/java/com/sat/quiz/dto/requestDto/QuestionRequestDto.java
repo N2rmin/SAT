@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class QuestionRequestDto {
     private String questionText;
+    private int orderNumber;
     private boolean status;
     private Long moduleId;
     private Long quizId;

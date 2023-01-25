@@ -20,9 +20,9 @@ public class Section extends BaseEntity{
     private String name;
     private boolean status;
 
-//    @ToString.Exclude
-//    @EqualsAndHashCode.Exclude
-//    @OneToMany(mappedBy = "section",cascade = CascadeType.ALL,fetch =FetchType.LAZY)
-//    private Set<Module> modules=new HashSet<>();
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "section",cascade = CascadeType.ALL,fetch =FetchType.LAZY)
+    private Set<Module> modules=new HashSet<>();
 
 }

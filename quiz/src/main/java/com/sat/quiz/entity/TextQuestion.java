@@ -30,6 +30,6 @@ public class TextQuestion {
     @OneToMany(mappedBy = "textQuestion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
     //@Fetch(value = FetchMode.SUBSELECT)
-//    @IndexColumn(name="text_question_id")
+    //    @IndexColumn(name="text_question_id")
     private Set<Question> questions=new HashSet<>();
 }

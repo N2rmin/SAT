@@ -19,11 +19,13 @@ public class QuestionResponseDto {
     private Long id;
     private String questionText;
   //  private Long textQuestionId;
-  //  private Module module;
-//    private TextQuestionResponseDto textQuestion;
+   private ModuleResponseDto module;
+    private int orderNumber;
+
+    //  private TextQuestionResponseDto textQuestion;
     //
     // private List<String> textQuestionContext;
-  //  private QuizResponseDto quiz;
+    private QuizResponseDto quiz;
     private List<AnswerResponseDto> answers;
 
 

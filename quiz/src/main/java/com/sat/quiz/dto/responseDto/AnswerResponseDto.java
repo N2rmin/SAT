@@ -11,7 +11,7 @@ public class AnswerResponseDto {
     private String answerText;
     private Boolean status;
     private Boolean isTrue;
-   // private Question question;
+   // private QuestionResponseDto question;
     //private List<String> textQuestionContext;
     
 

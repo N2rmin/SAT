@@ -9,12 +9,13 @@ import org.hibernate.annotations.*;
 import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.*;
 
 @Entity
 @Data
 @NoArgsConstructor
-
+@Table(uniqueConstraints ={ @UniqueConstraint(columnNames = { "moduleId", "quizId","orderNumber" }) } )
 public class Question extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,11 +25,13 @@ public class Question extends BaseEntity{
     private String questionText;
     private boolean status;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private int orderNumber;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "module_id")
     private Module module;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quiz_id")
     private Quiz quiz;
 
@@ -38,9 +41,8 @@ public class Question extends BaseEntity{
     private Set<Answer> answers=new HashSet<>();
 
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "text_question_id", referencedColumnName = "id" )
-
     private TextQuestion textQuestion;
 
    // private Long textQuestionId;
