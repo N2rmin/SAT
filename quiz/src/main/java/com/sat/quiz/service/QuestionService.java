@@ -25,6 +25,11 @@ public interface QuestionService {
 
     List<TextQuestionResponseDto> findAll();
 
+    QuestionResponseDto getQuestionForExam(Long quizId, Long moduleId, int orderNumber, boolean answer);
+
+    List<Object> getQuestionOrderNumbers(Long quizId, Long moduleId);
+
+
     //  ExamResponseDto getQuizAndModuleQuestions(Long moduleId);
 
    // List<QuestionResponseDto> getQuestionWithModule(Long id);

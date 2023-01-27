@@ -60,6 +60,7 @@ public class QuestionServiceImpl implements QuestionService {
        // question.setTextQuestionId(requestDto.getTextQuestionId());
         question.setQuestionText(requestDto.getQuestionText());
         question.setStatus(requestDto.isStatus());
+        question.setOrderNumber(requestDto.getOrderNumber());
         questionRepository.save(question);
         return modelMapper.map(question, QuestionResponseDto.class);
 
@@ -154,6 +155,7 @@ public class QuestionServiceImpl implements QuestionService {
             TextQuestion textQuestion= textQuestionService.getTextQuestionSelf(requestDto.getTextQuestionId());
             question.setTextQuestion(textQuestion);
         }
+        question.setOrderNumber(requestDto.getOrderNumber());
        // question.setTextQuestionId(requestDto.getTextQuestionId());
         question.setQuestionText(requestDto.getQuestionText());
         question.setStatus(requestDto.isStatus());
@@ -179,9 +181,48 @@ public class QuestionServiceImpl implements QuestionService {
         return List.of(textQuestionResponseDto);
     }
 
+    @Override
+    public QuestionResponseDto getQuestionForExam(Long quizId, Long moduleId, int orderNumber, boolean answer) {
+        System.out.println("1111");
+        Question question;
+
+         question=questionRepository.findByQuizIdAndModuleIdAndOrderNumber(quizId,moduleId,orderNumber);
+
+        System.out.println("2222");
+        if (!answer){
+            System.out.println("33333");
+            question.getAnswers().forEach(answer1 -> answer1.setIsTrue(null));
+            System.out.println("444444");
+        }
+
+        System.out.println("5555");
+          //  QuestionResponseDto questionResponseDto= modelMapper.map(question, QuestionResponseDto.class);
+
+
+
+      //  System.out.println("22222");
+
+      //  System.out.println(question);
+       // System.out.println("3333");
+
+        return modelMapper.map(question, QuestionResponseDto.class);
+    }
+
+    @Override
+    public List<Object> getQuestionOrderNumbers(Long quizId, Long moduleId) {
+
+        System.out.println("1111");
+        List<Object> orderNumbers= questionRepository.findAllOrderNumberByQuizIdAndModuleId(quizId,moduleId);
+
+        System.out.println("22222");
+        System.out.println(orderNumbers);
+        System.out.println("33333");
+        return orderNumbers;
+    }
+
 
     public  ExamResponseDto   questionToExamResponseDto(Long moduleId) {
-ExamResponseDto examResponseDto=new ExamResponseDto();
+      ExamResponseDto examResponseDto=new ExamResponseDto();
         System.out.println("H0");
 
         List<Question> allQuestion = StreamSupport

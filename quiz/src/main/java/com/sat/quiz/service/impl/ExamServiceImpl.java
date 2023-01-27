@@ -160,7 +160,7 @@ public class ExamServiceImpl  {
    ExamResponseDto examResponseDto=new ExamResponseDto();
 
    examResponseDto.setQuestionResponseDtos(questionService.getQuizAndModuleQuestions(quizId,moduleId));
-  examResponseDto.setTextQuestionResponseDtos(textQuestionService.getTextQuestionsWithQuizAndModule(quizId,moduleId));
+ // examResponseDto.setTextQuestionResponseDtos(textQuestionService.getTextQuestionsWithQuizAndModule(quizId,moduleId));
 //        System.out.println("H0");
 //
 //        List<Question> allQuestion = StreamSupport

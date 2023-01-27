@@ -3,6 +3,7 @@ package com.sat.quiz.repository;
 import com.sat.quiz.entity.Question;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -25,5 +26,14 @@ public interface QuestionRepository extends JpaRepository<Question,Long> {
 
     @EntityGraph(attributePaths = {"answers","module","module.section","quiz"})
     List<Question> findAllByQuizIdAndModuleIdAndTextQuestionIsNull(Long quizId,Long moduleId);
+
+    @EntityGraph(attributePaths = {"textQuestion","answers","module","module.section","quiz"})
+    Question findByQuizIdAndModuleIdAndOrderNumber(Long quizId,Long moduleId,int orderNumber);
+
+   // @EntityGraph(attributePaths = {"textQuestion","answers","module","module.section","quiz"})
+
+    @Query(value = "SELECT order_number FROM question where quiz_id=? and module_id=? ", nativeQuery = true)
+    List<Object> findAllOrderNumberByQuizIdAndModuleId(Long quizId, Long moduleId);
+
 
 }

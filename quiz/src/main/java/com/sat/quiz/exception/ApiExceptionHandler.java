@@ -51,7 +51,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public final ResponseEntity<ExceptionResponse>  DataIntegrityViolationException (Exception exception, WebRequest request){
-        ExceptionResponse exceptionResponse = new ExceptionResponse(LocalDateTime.now(),"Promocode sahesi eyni ola bilmez","1003");
+        ExceptionResponse exceptionResponse = new ExceptionResponse(LocalDateTime.now(),exception.getMessage(),"1003");
         return  new ResponseEntity<ExceptionResponse>(exceptionResponse, HttpStatus.BAD_REQUEST);
 
     }

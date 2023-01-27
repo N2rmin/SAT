@@ -50,7 +50,7 @@ public class TextQuestionServiceImpl implements TextQuestionService {
         return list;
     }
 
-    @Override
+/*    @Override
     public List<TextQuestionResponseDto> getTextQuestionsWithQuizAndModule(Long quizId,Long moduleId) {
 
 
@@ -61,7 +61,7 @@ public class TextQuestionServiceImpl implements TextQuestionService {
         });
 
         return list;
-    }
+    }*/
 
     @Override
     public TextQuestionResponseDto getTextQuestion(Long id) {

@@ -18,13 +18,11 @@ import java.util.Map;
 public class QuestionResponseDto {
     private Long id;
     private String questionText;
-  //  private Long textQuestionId;
-   private ModuleResponseDto module;
+    //  private Long textQuestionId;
+    private ModuleResponseDto module;
     private int orderNumber;
-
-    //  private TextQuestionResponseDto textQuestion;
-    //
     // private List<String> textQuestionContext;
+     private TextQuestionResponseDto textQuestion;
     private QuizResponseDto quiz;
     private List<AnswerResponseDto> answers;
 

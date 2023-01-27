@@ -12,7 +12,7 @@ public class TextQuestionResponseDto {
     private String textContent;
     private boolean status;
 
-    private List<QuestionResponseDto> questions;
+   // private List<QuestionResponseDto> questions;
 
 
    // private Map<Object,Object> questionAnswer;

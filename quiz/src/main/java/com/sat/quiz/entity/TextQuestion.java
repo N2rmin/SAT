@@ -22,14 +22,15 @@ public class TextQuestion {
     private Long id;
 
 
+    @Lob
     private String textContent;
     private boolean status;
 
 
 
-    @OneToMany(mappedBy = "textQuestion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @EqualsAndHashCode.Exclude
+   // @OneToMany(mappedBy = "textQuestion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+   // @EqualsAndHashCode.Exclude
     //@Fetch(value = FetchMode.SUBSELECT)
     //    @IndexColumn(name="text_question_id")
-    private Set<Question> questions=new HashSet<>();
+  //  private Set<Question> questions=new HashSet<>();
 }

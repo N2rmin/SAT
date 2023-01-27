@@ -15,6 +15,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -56,14 +57,29 @@ private final QuestionRepository questionRepository;
         return list;
     }
 
-    @GetMapping("testTextwith/{quizId}/{moduleId}")
-    public List<TextQuestionDtoTest> getTextwithQuestionsTest(@PathVariable("quizId") Long quizId,@PathVariable("moduleId") Long moduleId){
-        List<TextQuestionDtoTest> list = new ArrayList<>();
+//    @GetMapping("testTextwith/{quizId}/{moduleId}")
+//    public List<TextQuestionDtoTest> getwithQuestionsTest(@PathVariable("quizId") Long quizId,@PathVariable("moduleId") Long moduleId){
+//        List<TextQuestionDtoTest> list = new ArrayList<>();
+//
+//        textQuestionRepository.findAllByQuestions_QuizIdAndQuestions_ModuleId(quizId,moduleId).stream().forEach(obj->{
+//            list.add(modelMapper.map(obj,TextQuestionDtoTest.class));
+//        });
+//        return list;
+//    }
 
-        textQuestionRepository.findAllByQuestions_QuizIdAndQuestions_ModuleId(quizId,moduleId).stream().forEach(obj->{
-            list.add(modelMapper.map(obj,TextQuestionDtoTest.class));
-        });
-        return list;
+    @Transactional
+    @GetMapping("questionForExam/{quizId}/{moduleId}/{orderNumber}/{answer}")
+    public ResponseEntity<QuestionResponseDto> getQuestionForExam(@PathVariable("quizId") Long quizId,@PathVariable("moduleId") Long moduleId,
+                                                    @PathVariable("orderNumber") int orderNumber,
+                                                                  @PathVariable("answer") boolean answer){
+      QuestionResponseDto questionResponseDto =questionService.getQuestionForExam(quizId,moduleId,orderNumber,answer);
+        return ResponseEntity.ok(questionResponseDto);
+    }
+
+    @GetMapping("orderNumbers/{quizId}/{moduleId}")
+    public ResponseEntity<List<Object>> getQuestionOrderNumbers(@PathVariable("quizId") Long quizId,@PathVariable("moduleId") Long moduleId){
+        List<Object> orderNumbers =questionService.getQuestionOrderNumbers(quizId,moduleId);
+        return ResponseEntity.ok(orderNumbers);
     }
 
     @GetMapping("testText")
@@ -123,6 +139,7 @@ private final QuestionRepository questionRepository;
         return ResponseEntity.ok(questionResponseDto);
     }
 
+    @Transactional
     @PutMapping("{id}")
     public ResponseEntity<QuestionResponseDto> updateQuestion(@PathVariable("id") Long id,
                                                                 @RequestBody QuestionRequestDto requestDto){
