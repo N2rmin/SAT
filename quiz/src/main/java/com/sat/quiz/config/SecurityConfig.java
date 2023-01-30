@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -18,6 +19,7 @@ import static org.springframework.boot.autoconfigure.security.servlet.PathReques
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -34,11 +36,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }//
     @Override
     protected void configure(HttpSecurity http) throws Exception{
-        http
-                .httpBasic()
-                .and()
+
+        http.csrf().disable();
+        http.httpBasic().and()
+
+
                 .authorizeRequests()
-                .antMatchers("/results").permitAll()
+             .antMatchers("/results").permitAll()
+                .antMatchers("/questions/questionForExam/**").permitAll()
+
+//                .antMatchers("/examiner").permitAll()
+//                .antMatchers("/questions/questionForExam/**").permitAll()
+//                .and().authorizeRequests().anyRequest().authenticated();
                 .antMatchers(HttpMethod.GET,"/questions/**").authenticated()
                 .antMatchers(HttpMethod.POST,"/questions/**").authenticated()
                 .antMatchers(HttpMethod.GET,"/textQuestions/**").authenticated()
@@ -47,9 +56,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST,"/answers/**").authenticated()
                 .antMatchers(HttpMethod.GET,"/modules/**").authenticated()
                 .antMatchers(HttpMethod.POST,"/modules/**").authenticated()
-                .antMatchers(HttpMethod.POST,"/auth").authenticated()
-                .and()
-                .csrf().disable();
+                .antMatchers(HttpMethod.PUT,"/modules/**").authenticated()
+                .antMatchers(HttpMethod.DELETE,"/modules/**").authenticated()
+                .antMatchers(HttpMethod.GET,"/quizs/**").authenticated()
+                .antMatchers(HttpMethod.PUT,"/quizs/**").authenticated()
+                .antMatchers(HttpMethod.POST,"/quizs/**").authenticated()
+                .antMatchers(HttpMethod.DELETE,"/quizs/**").authenticated()
+                .antMatchers(HttpMethod.GET,"/sections/**").authenticated()
+                .antMatchers(HttpMethod.PUT,"/sections/**").authenticated()
+                .antMatchers(HttpMethod.POST,"/sections/**").authenticated()
+                .antMatchers(HttpMethod.DELETE,"/sections/**").authenticated()
+                .antMatchers("/answers/**").authenticated()
+                .antMatchers(HttpMethod.POST,"/auth").authenticated();
+
 
                 //.antMatchers("/login").authenticated()
               //  .antMatchers(HttpMethod.GET,"/").hasRole("User")
