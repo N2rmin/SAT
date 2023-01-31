@@ -8,11 +8,13 @@ import com.sat.quiz.entity.Module;
 import com.sat.quiz.entity.Answer;
 import com.sat.quiz.entity.Question;
 import com.sat.quiz.entity.Quiz;
+import com.sat.quiz.entity.Variant;
 import com.sat.quiz.repository.AnswerRepository;
 import com.sat.quiz.service.ModuleService;
 import com.sat.quiz.service.AnswerService;
 import com.sat.quiz.service.QuestionService;
 import com.sat.quiz.service.QuizService;
+import com.sat.quiz.service.VariantService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,8 @@ public class AnswerServiceImpl implements AnswerService {
 
     private final QuestionService questionService;
 
+    private final VariantService variantService;
+
     private final ModelMapper modelMapper;
 
     @Override
@@ -41,6 +45,12 @@ public class AnswerServiceImpl implements AnswerService {
         }
         Question question= questionService.getQuestionSelf(requestDto.getQuestionId());
         answer.setQuestion(question);
+
+        if (requestDto.getVariantId()==null){
+            throw  new IllegalArgumentException("answer at least one variant");
+        }
+        Variant variant= variantService.getVariantSelf(requestDto.getVariantId());
+        answer.setVariant(variant);
 
         answer.setAnswerText(requestDto.getAnswerText());
         answer.setStatus(requestDto.getStatus());
@@ -94,6 +104,12 @@ public class AnswerServiceImpl implements AnswerService {
             Question question= questionService.getQuestionSelf(requestDto.getQuestionId());
             answer.setQuestion(question);
         }
+
+        if(requestDto.getVariantId()!=null){
+            Variant variant=variantService.getVariantSelf(requestDto.getVariantId());
+            answer.setVariant(variant);
+        }
+
 
         answer.setAnswerText(requestDto.getAnswerText());
         answer.setStatus(requestDto.getStatus());

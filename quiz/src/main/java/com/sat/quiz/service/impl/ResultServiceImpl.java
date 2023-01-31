@@ -8,6 +8,7 @@ import com.sat.quiz.entity.*;
 import com.sat.quiz.entity.Module;
 import com.sat.quiz.repository.AnswerRepository;
 import com.sat.quiz.repository.ResultRepository;
+import com.sat.quiz.repository.UsersAnswersRepository;
 import com.sat.quiz.service.ModuleService;
 import com.sat.quiz.service.ResultService;
 import com.sat.quiz.service.QuizService;
@@ -16,11 +17,14 @@ import javax.validation.ConstraintViolationException;
 import org.modelmapper.ModelMapper;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLData;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.sql.SQLTimeoutException;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -34,11 +38,15 @@ public class ResultServiceImpl implements ResultService {
     private final QuizService quizService;
 
     private final ExaminerServiceImpl examinerService;
+
+    private final UsersAnswersRepository usersAnswersRepository;
     private final AnswerRepository answerRepository;
 
 
     private final ModelMapper modelMapper;
 
+
+    @Transactional
     @Override
     public ResultResponseDto addResult(ResultRequestDto requestDto) {
         Result result= new Result();
@@ -57,6 +65,7 @@ public class ResultServiceImpl implements ResultService {
         Examiner examiner= examinerService.getExaminerSelf(requestDto.getExaminerId());
         result.setExaminer(examiner);
 
+        LinkedHashSet<Long> answerIds= new LinkedHashSet<>();
         int score =0;
         Long questionId;
         Long answerId;
@@ -64,11 +73,15 @@ public class ResultServiceImpl implements ResultService {
             System.out.println(entry);
             questionId=entry.getKey();
             answerId=entry.getValue();
+            answerIds.add(answerId);
+
 
            Answer answer= answerRepository.findByIdAndQuestion_Id(answerId,questionId);
            if(answer.getIsTrue()){
                score++;
            }
+
+
 
         }
 
@@ -82,7 +95,22 @@ public class ResultServiceImpl implements ResultService {
         result.setStatus(requestDto.getStatus());
 
 
-            resultRepository.save(result);
+        resultRepository.save(result);
+
+        System.out.println(result.getId());
+
+            for (long id: answerIds){
+                UsersAnswers usersAnswers= new UsersAnswers();
+
+                usersAnswers.setResult(result);
+
+                usersAnswers.setUserVariantId(id);
+                System.out.println(id);
+
+                usersAnswersRepository.save(usersAnswers);
+            }
+
+
 
 
         //

@@ -2,7 +2,8 @@ package com.sat.quiz.dto.requestDto;
 
 import lombok.Data;
 
-import java.util.List;
+import javax.validation.constraints.NotNull;
+
 
 @Data
 public class AnswerRequestDto {
@@ -10,6 +11,7 @@ public class AnswerRequestDto {
     private Boolean status;
     private Boolean isTrue;
     private Long questionId;
+    private Long variantId;
 
 
 }

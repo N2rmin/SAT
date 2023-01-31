@@ -5,7 +5,7 @@ import com.sat.quiz.dto.responseDto.AnswerResponseDto;
 import com.sat.quiz.service.AnswerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +24,6 @@ public class AnswerController {
         return ResponseEntity.ok(answerResponseDto);
     }
 
-
     @GetMapping
     public ResponseEntity<List<AnswerResponseDto>> getAnswers(){
         List<AnswerResponseDto> answerResponseDtos =answerService.getAnswers();
@@ -42,6 +41,7 @@ public class AnswerController {
 //        return ResponseEntity.ok(answerService.getAnswersWithQuestion(id));
 //    }
 
+    @Transactional
     @PutMapping("{id}")
     public ResponseEntity<AnswerResponseDto> updateAnswer(@PathVariable("id") Long id,
                                                                 @RequestBody AnswerRequestDto requestDto){
@@ -49,6 +49,7 @@ public class AnswerController {
         return ResponseEntity.ok(answerResponseDto);
     }
 
+    @Transactional
     @DeleteMapping("{id}")
     public ResponseEntity<Boolean> deleteAnswer(@PathVariable("id") Long id){
         Boolean resultAnswer=answerService.deleteAnswer(id);

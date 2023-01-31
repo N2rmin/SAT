@@ -24,10 +24,14 @@ public class Answer extends BaseEntity{
 
 
 
+
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id", referencedColumnName = "id" )
     private Question question;
 
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "variant_id", referencedColumnName = "id" )
+    private Variant variant;
 
 
 

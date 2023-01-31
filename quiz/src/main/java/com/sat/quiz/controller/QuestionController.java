@@ -35,6 +35,7 @@ private final QuestionRepository questionRepository;
 
 
 
+    @Transactional
     @PostMapping
     public ResponseEntity<QuestionResponseDto> addQuestion(@RequestBody QuestionRequestDto requestDto){
         QuestionResponseDto questionResponseDto=questionService.addQuestion(requestDto);
@@ -76,6 +77,7 @@ private final QuestionRepository questionRepository;
         return ResponseEntity.ok(questionResponseDto);
     }
 
+    @Transactional
     @GetMapping("orderNumbers/{quizId}/{moduleId}")
     public ResponseEntity<List<Object>> getQuestionOrderNumbers(@PathVariable("quizId") Long quizId,@PathVariable("moduleId") Long moduleId){
         List<Object> orderNumbers =questionService.getQuestionOrderNumbers(quizId,moduleId);

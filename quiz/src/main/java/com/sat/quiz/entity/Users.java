@@ -1,7 +1,6 @@
 package com.sat.quiz.entity;
 
 import lombok.Data;
-import org.hibernate.annotations.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

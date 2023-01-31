@@ -188,11 +188,10 @@ public class QuestionServiceImpl implements QuestionService {
 
          question=questionRepository.findByQuizIdAndModuleIdAndOrderNumber(quizId,moduleId,orderNumber);
 
-        System.out.println("2222");
+        System.out.println(answer);
         if (!answer){
-            System.out.println("33333");
+            System.out.println(answer);
             question.getAnswers().forEach(answer1 -> answer1.setIsTrue(null));
-            System.out.println("444444");
         }
 
         System.out.println("5555");

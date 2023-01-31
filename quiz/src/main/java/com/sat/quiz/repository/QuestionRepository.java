@@ -30,8 +30,7 @@ public interface QuestionRepository extends JpaRepository<Question,Long> {
     @EntityGraph(attributePaths = {"textQuestion","answers","module","module.section","quiz"})
     Question findByQuizIdAndModuleIdAndOrderNumber(Long quizId,Long moduleId,int orderNumber);
 
-   // @EntityGraph(attributePaths = {"textQuestion","answers","module","module.section","quiz"})
-
+    //@EntityGraph(attributePaths = {"textQuestion","answers","answers.variant","module","module.section","quiz"})
     @Query(value = "SELECT order_number FROM question where quiz_id=? and module_id=? ", nativeQuery = true)
     List<Object> findAllOrderNumberByQuizIdAndModuleId(Long quizId, Long moduleId);
 
