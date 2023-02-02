@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface ResultRepository extends JpaRepository<Result,Long> {
 
+    Result findByExaminerIdAndModuleId(Long examinerId,Long moduleId);
 
 }

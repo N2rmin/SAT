@@ -13,4 +13,8 @@ public interface UsersAnswersRepository extends JpaRepository<UsersAnswers,Long>
 
  //   @EntityGraph(attributePaths = {"modules"})
     Optional<UsersAnswers> findById(Long id);
+
+    UsersAnswers findAllByResultId(Long id);
+
+    UsersAnswers findByResultIdAndOrderNumber(Long resultId,int orderNumber);
 }

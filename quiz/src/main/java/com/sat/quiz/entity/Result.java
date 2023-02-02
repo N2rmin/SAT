@@ -22,6 +22,8 @@ public class Result {
     private Boolean status;
 
 
+    private Long moduleId;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quiz_id")

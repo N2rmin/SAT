@@ -9,9 +9,12 @@ import java.util.Map;
 public class ResultRequestDto {
 
 
-    private Map<Long,Long> questionAnswer;
+    private Map<Integer,Long> questionAnswer;
 //    private Long questionId;
     private Long quizId;
+
+    private Long moduleId;
+
 
     private Boolean status;
     private Long examinerId;

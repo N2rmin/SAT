@@ -188,7 +188,12 @@ public class QuestionServiceImpl implements QuestionService {
 
          question=questionRepository.findByQuizIdAndModuleIdAndOrderNumber(quizId,moduleId,orderNumber);
 
-        System.out.println(answer);
+
+
+         TreeSet<Answer> answers= new TreeSet<>(question.getAnswers());
+
+        question.setAnswers(answers);
+
         if (!answer){
             System.out.println(answer);
             question.getAnswers().forEach(answer1 -> answer1.setIsTrue(null));

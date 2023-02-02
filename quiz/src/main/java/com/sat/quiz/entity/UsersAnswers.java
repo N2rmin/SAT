@@ -22,6 +22,8 @@ public class UsersAnswers {
 
     private Long userVariantId;
 
+    private int orderNumber;
+
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "result_id", referencedColumnName = "id" )

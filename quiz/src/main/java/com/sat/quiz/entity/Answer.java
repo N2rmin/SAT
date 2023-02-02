@@ -1,17 +1,14 @@
 package com.sat.quiz.entity;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
 @Entity
 @Data
 @NoArgsConstructor
-public class Answer extends BaseEntity{
+public class Answer  implements Comparable<Answer>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,10 +26,15 @@ public class Answer extends BaseEntity{
     @JoinColumn(name = "question_id", referencedColumnName = "id" )
     private Question question;
 
+
+
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "variant_id", referencedColumnName = "id" )
     private Variant variant;
 
 
-
+    @Override
+    public int compareTo(Answer answer) {
+        return Long.compare(getVariant().getId(),answer.variant.getId());
+    }
 }

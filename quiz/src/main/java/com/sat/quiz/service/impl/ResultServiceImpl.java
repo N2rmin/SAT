@@ -65,18 +65,23 @@ public class ResultServiceImpl implements ResultService {
         Examiner examiner= examinerService.getExaminerSelf(requestDto.getExaminerId());
         result.setExaminer(examiner);
 
-        LinkedHashSet<Long> answerIds= new LinkedHashSet<>();
+        result.setModuleId(requestDto.getModuleId());
+
+    //    LinkedHashSet<Long> answerIds= new LinkedHashSet<>();
+    //    LinkedHashSet<Long> questionIds= new LinkedHashSet<>();
+
+
         int score =0;
-        Long questionId;
+        int questionId;
         Long answerId;
-        for(Map.Entry<Long,Long> entry:requestDto.getQuestionAnswer().entrySet()){
+        for(Map.Entry<Integer,Long> entry:requestDto.getQuestionAnswer().entrySet()){
             System.out.println(entry);
             questionId=entry.getKey();
             answerId=entry.getValue();
-            answerIds.add(answerId);
 
 
-           Answer answer= answerRepository.findByIdAndQuestion_Id(answerId,questionId);
+
+           Answer answer= answerRepository.findByVariantIdAndQuestionOrderNumberAndQuestionModuleIdAndQuestionQuizId(answerId,questionId, requestDto.getModuleId(), requestDto.getQuizId());
            if(answer.getIsTrue()){
                score++;
            }
@@ -99,13 +104,17 @@ public class ResultServiceImpl implements ResultService {
 
         System.out.println(result.getId());
 
-            for (long id: answerIds){
+            for (Map.Entry<Integer,Long> entry:requestDto.getQuestionAnswer().entrySet()){
                 UsersAnswers usersAnswers= new UsersAnswers();
 
                 usersAnswers.setResult(result);
+                questionId=entry.getKey();
+                answerId=entry.getValue();
 
-                usersAnswers.setUserVariantId(id);
-                System.out.println(id);
+                usersAnswers.setUserVariantId(answerId);
+                usersAnswers.setOrderNumber(questionId);
+                System.out.println(questionId);
+                System.out.println(answerId);
 
                 usersAnswersRepository.save(usersAnswers);
             }
