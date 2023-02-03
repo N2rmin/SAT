@@ -7,4 +7,6 @@ public class ModuleRequestDto {
     private String name;
     private boolean status;
     private Long sectionId;
+
+    private int duration;
 }

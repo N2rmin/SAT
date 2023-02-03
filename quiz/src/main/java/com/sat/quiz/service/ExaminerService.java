@@ -8,7 +8,7 @@ import java.util.List;
 
 
 public interface ExaminerService {
-    ExaminerResponseDto addExaminer(ExaminerRequestDto requestDto);
+    ExaminerResponseDto addExaminer(ExaminerRequestDto requestDto) throws Exception;
 
     List<ExaminerResponseDto> getExaminers();
 

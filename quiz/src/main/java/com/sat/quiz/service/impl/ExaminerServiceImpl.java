@@ -6,13 +6,17 @@ import com.sat.quiz.dto.responseDto.ExaminerResponseDto;
 import com.sat.quiz.dto.responseDto.TextQuestionResponseDto;
 import com.sat.quiz.entity.Examiner;
 
+import com.sat.quiz.entity.PromoCode;
 import com.sat.quiz.entity.TextQuestion;
 import com.sat.quiz.repository.ExaminerRepository;
+import com.sat.quiz.repository.PromoCodeRepository;
 import com.sat.quiz.service.ExaminerService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -22,23 +26,46 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ExaminerServiceImpl implements ExaminerService {
     private final ExaminerRepository examinerRepository;
+
+    private final PromoCodeRepository promoCodeRepository;
     private final ModelMapper modelMapper;
 
 
 
     @Override
-    public ExaminerResponseDto addExaminer(ExaminerRequestDto requestDto) {
+    public ExaminerResponseDto addExaminer(ExaminerRequestDto requestDto) throws Exception {
         //TextQuestion textQuestion= modelMapper.map(requestDto,TextQuestion.class);
 
         Examiner examiner=modelMapper.map(requestDto,Examiner.class);
 
-      //  examiner.setCreatedDate(new Date());
-        //examiner.setCreatedBy("Narmin");
+        String promoCode= examiner.getPromoCode();
+
+        PromoCode promoCode1=promoCodeRepository.findByPromoCode(promoCode);
+
+
+//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+//
+//
+//        LocalDateTime now = LocalDateTime.now();
+//        System.out.println(dtf.format(now));
+
+
+
+         System.out.println(promoCode1.getStartDate().compareTo(new Date()));
+if (promoCode1.getStartDate().compareTo(new Date())>0) {
+
+    System.out.println("Imtahan hele aktiv deyil");
+    throw new Exception("Imtahan hele aktiv deyil");
+    //  examiner.setCreatedDate(new Date());
+    //examiner.setCreatedBy("Narmin");
 //        examiner.setName(requestDto.getName());
 //        examiner.setLastName(requestDto.getLastName());
 //        examiner.setPromoCode(requestDto.getPromoCode());
 
+    }
+
     //   examinerRepository.save(examiner);
+
 
         return  modelMapper.map(examinerRepository.save(examiner), ExaminerResponseDto.class);
 

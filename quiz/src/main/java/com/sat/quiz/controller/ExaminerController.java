@@ -20,7 +20,7 @@ public class ExaminerController {
     }
 
     @PostMapping
-    public ResponseEntity<ExaminerResponseDto> addExaminer(@Valid @RequestBody ExaminerRequestDto requestDto){
+    public ResponseEntity<ExaminerResponseDto> addExaminer(@Valid @RequestBody ExaminerRequestDto requestDto) throws Exception {
         ExaminerResponseDto examinerResponseDto=examinerService.addExaminer(requestDto);
         return ResponseEntity.ok(examinerResponseDto);
     }
