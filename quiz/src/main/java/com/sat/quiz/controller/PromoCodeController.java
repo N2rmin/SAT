@@ -33,9 +33,9 @@ public class PromoCodeController {
         return ResponseEntity.ok(promoCodeResponseDto);
     }
 
-    @GetMapping
-    public ResponseEntity<List<PromoCodeResponseDto>> getPromoCodes(){
-        List<PromoCodeResponseDto> promoCodeResponseDtos =promoCodeService.getPromoCodes();
+    @GetMapping("list/{isUsed}")
+    public ResponseEntity<List<PromoCodeResponseDto>> getPromoCodes(@PathVariable("isUsed") Boolean isUsed ){
+        List<PromoCodeResponseDto> promoCodeResponseDtos =promoCodeService.getPromoCodes(isUsed);
         return ResponseEntity.ok(promoCodeResponseDtos);
     }
 

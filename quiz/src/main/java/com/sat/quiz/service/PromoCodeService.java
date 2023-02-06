@@ -11,7 +11,7 @@ import java.util.List;
 public interface PromoCodeService {
     PromoCodeResponseDto addPromoCode(PromoCodeRequestDto requestDto);
 
-    List<PromoCodeResponseDto> getPromoCodes();
+    List<PromoCodeResponseDto> getPromoCodes(Boolean isUsed);
 
     PromoCodeResponseDto getPromoCode(Long id);
 

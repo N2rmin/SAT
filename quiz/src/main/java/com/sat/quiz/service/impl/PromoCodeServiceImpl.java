@@ -42,8 +42,14 @@ public class PromoCodeServiceImpl implements PromoCodeService {
     }
 
     @Override
-    public List<PromoCodeResponseDto> getPromoCodes() {
-        List<PromoCode> promoCodes=promoCodeRepository.findAll();
+    public List<PromoCodeResponseDto> getPromoCodes(Boolean isUsed) {
+        List<PromoCode> promoCodes;
+        if (isUsed){
+                promoCodes=promoCodeRepository.findAllByStartDateIsNotNull();
+    }else {
+            promoCodes=promoCodeRepository.findAllByStartDateIsNull();
+        }
+
         List<PromoCodeResponseDto> promoCodeResponseDtos=promoCodes.stream().map(promoCode -> modelMapper.map(promoCode,PromoCodeResponseDto.class)).collect(Collectors.toList());
         return promoCodeResponseDtos;
     }

@@ -1,0 +1,4 @@
+List<PenaltyIXQSDto> penaltyList = new ArrayList<>();
+        penaltyList.addAll(getPenaltyList(restTemplateIXQS, ixqsApiUrl, type));
+        System.out.println(penaltyList.size());
+        return penaltyList;
