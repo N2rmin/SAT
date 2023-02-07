@@ -40,6 +40,7 @@ public class ModuleServiceImpl implements ModuleService {
         module.setName(requestDto.getName());
         module.setStatus(requestDto.isStatus());
         module.setDuration(requestDto.getDuration());
+        module.setNumberOfQuestion(requestDto.getNumberOfQuestion());
         return modelMapper.map(moduleRepository.save(module), ModuleResponseDto.class );
 
     }
@@ -84,6 +85,7 @@ public class ModuleServiceImpl implements ModuleService {
         module.setName(requestDto.getName());
         module.setStatus(requestDto.isStatus());
         module.setDuration(requestDto.getDuration());
+        module.setNumberOfQuestion(requestDto.getNumberOfQuestion());
         moduleRepository.save(module);
         return modelMapper.map(module,ModuleResponseDto.class);
     }

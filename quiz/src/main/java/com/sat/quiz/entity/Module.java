@@ -18,6 +18,8 @@ public class Module extends BaseEntity{
 
     private Integer duration;
 
+    private Integer numberOfQuestion;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "section_id", referencedColumnName = "id")
     private Section section;

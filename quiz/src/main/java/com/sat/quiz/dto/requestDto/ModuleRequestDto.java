@@ -9,4 +9,7 @@ public class ModuleRequestDto {
     private Long sectionId;
 
     private int duration;
+
+    private int numberOfQuestion;
+
 }

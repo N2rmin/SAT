@@ -6,4 +6,7 @@ import lombok.Data;
 public class TextQuestionRequestDto {
     private String textContent;
     private boolean status;
+
+    private Boolean isText;
+
 }

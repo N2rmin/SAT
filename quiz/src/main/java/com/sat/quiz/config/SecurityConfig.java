@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .authorizeRequests()
              .antMatchers("/results").permitAll()
-                .antMatchers("/questions/questionForExam/**").permitAll()
+                .antMatchers("/questions/questionForExam/questionForExam/**").permitAll()
 
 //                .antMatchers("/examiner").permitAll()
 //                .antMatchers("/questions/questionForExam/**").permitAll()

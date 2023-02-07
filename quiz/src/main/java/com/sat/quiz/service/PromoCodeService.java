@@ -1,5 +1,6 @@
 package com.sat.quiz.service;
 
+import com.sat.quiz.dto.requestDto.PromoCodeDate;
 import com.sat.quiz.dto.requestDto.PromoCodeRequestDto;
 import com.sat.quiz.dto.responseDto.PromoCodeResponseDto;
 import com.sat.quiz.entity.PromoCode;
@@ -16,7 +17,7 @@ public interface PromoCodeService {
     PromoCodeResponseDto getPromoCode(Long id);
 
     PromoCode getPromoCodeSelf(Long id);
-    PromoCodeResponseDto updatePromoCode(Long id, PromoCodeRequestDto requestDto);
+    PromoCodeResponseDto updatePromoCode(PromoCodeDate requestDto );
 
     Boolean deletePromoCode(Long id);
 

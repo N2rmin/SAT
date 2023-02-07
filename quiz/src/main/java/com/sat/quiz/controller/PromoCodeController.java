@@ -1,5 +1,6 @@
 package com.sat.quiz.controller;
 
+import com.sat.quiz.dto.requestDto.PromoCodeDate;
 import com.sat.quiz.dto.requestDto.PromoCodeRequestDto;
 import com.sat.quiz.dto.responseDto.PromoCodeResponseDto;
 import com.sat.quiz.service.PromoCodeService;
@@ -69,10 +70,10 @@ public class PromoCodeController {
         return ResponseEntity.ok(promoCodeResponseDto);
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity<PromoCodeResponseDto> updatePromoCode(@PathVariable("id") Long id,
-                                                                @RequestBody PromoCodeRequestDto requestDto){
-        PromoCodeResponseDto promoCodeResponseDto= promoCodeService.updatePromoCode(id,requestDto);
+    @PutMapping("/addDate")
+    public ResponseEntity<PromoCodeResponseDto> updatePromoCode(
+                                                                @RequestBody PromoCodeDate requestDto){
+        PromoCodeResponseDto promoCodeResponseDto= promoCodeService.updatePromoCode(requestDto);
         return ResponseEntity.ok(promoCodeResponseDto);
     }
 

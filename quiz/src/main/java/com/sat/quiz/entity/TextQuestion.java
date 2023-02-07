@@ -26,6 +26,8 @@ public class TextQuestion {
     private String textContent;
     private boolean status;
 
+    private Boolean isText;
+
 
 
    // @OneToMany(mappedBy = "textQuestion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

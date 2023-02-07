@@ -69,11 +69,20 @@ private final QuestionRepository questionRepository;
 //    }
 
     @Transactional
-    @GetMapping("questionForExam/{quizId}/{moduleId}/{orderNumber}/{answer}")
+    @GetMapping("questionForExam/{quizId}/{moduleId}/{orderNumber}")
     public ResponseEntity<QuestionResponseDto> getQuestionForExam(@PathVariable("quizId") Long quizId,@PathVariable("moduleId") Long moduleId,
-                                                    @PathVariable("orderNumber") int orderNumber,
-                                                                  @PathVariable("answer") boolean answer){
-      QuestionResponseDto questionResponseDto =questionService.getQuestionForExam(quizId,moduleId,orderNumber,answer);
+                                                    @PathVariable("orderNumber") int orderNumber
+                                                                 ){
+      QuestionResponseDto questionResponseDto =questionService.getQuestionForExam(quizId,moduleId,orderNumber);
+        return ResponseEntity.ok(questionResponseDto);
+    }
+
+    @Transactional
+    @GetMapping("questionWithAnswer/{quizId}/{moduleId}/{orderNumber}")
+    public ResponseEntity<QuestionResponseDto> getQuestionWithAnswer(@PathVariable("quizId") Long quizId,@PathVariable("moduleId") Long moduleId,
+                                                                  @PathVariable("orderNumber") int orderNumber
+                                                                  ){
+        QuestionResponseDto questionResponseDto =questionService.getQuestionWithAnswer(quizId,moduleId,orderNumber);
         return ResponseEntity.ok(questionResponseDto);
     }
 

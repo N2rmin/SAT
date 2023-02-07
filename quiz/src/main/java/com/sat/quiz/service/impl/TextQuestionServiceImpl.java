@@ -83,6 +83,7 @@ public class TextQuestionServiceImpl implements TextQuestionService {
         if(textQuestion.isPresent()){
             textQuestion.get().setTextContent(requestDto.getTextContent());
             textQuestion.get().setStatus(requestDto.isStatus());
+            textQuestion.get().setIsText(requestDto.getIsText());
 
 
 

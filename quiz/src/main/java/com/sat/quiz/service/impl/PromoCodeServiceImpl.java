@@ -1,5 +1,7 @@
 package com.sat.quiz.service.impl;
 
+import com.sat.quiz.dto.requestDto.PromoCodeDate;
+import com.sat.quiz.dto.requestDto.PromoCodeId;
 import com.sat.quiz.dto.requestDto.PromoCodeRequestDto;
 import com.sat.quiz.dto.responseDto.PromoCodeResponseDto;
 import com.sat.quiz.entity.PromoCode;
@@ -45,9 +47,9 @@ public class PromoCodeServiceImpl implements PromoCodeService {
     public List<PromoCodeResponseDto> getPromoCodes(Boolean isUsed) {
         List<PromoCode> promoCodes;
         if (isUsed){
-                promoCodes=promoCodeRepository.findAllByStartDateIsNotNull();
+                promoCodes=promoCodeRepository.findTopByIdAndStartDateIsNotNull(50L);
     }else {
-            promoCodes=promoCodeRepository.findAllByStartDateIsNull();
+            promoCodes=promoCodeRepository.findFirst50AndStartDateIsNullByOrderByIdAsc();
         }
 
         List<PromoCodeResponseDto> promoCodeResponseDtos=promoCodes.stream().map(promoCode -> modelMapper.map(promoCode,PromoCodeResponseDto.class)).collect(Collectors.toList());
@@ -69,18 +71,24 @@ public class PromoCodeServiceImpl implements PromoCodeService {
     }
 
     @Override
-    public PromoCodeResponseDto updatePromoCode(Long id, PromoCodeRequestDto requestDto) {
-        Optional<PromoCode> promoCode = promoCodeRepository.findById(id);
-        if(promoCode.isPresent()){
+    public PromoCodeResponseDto updatePromoCode( PromoCodeDate requestDto) {
+        for (Long id:requestDto.getPromoCodeIds()){
+            Optional<PromoCode> promoCode = promoCodeRepository.findById(id);
+            System.out.println(id);
+            if(promoCode.isPresent()){
 
-            // promoCode.get().setStatus(requestDto.isStatus());
-            promoCode.get().setStartDate(requestDto.getStartDate());
-            promoCode.get().setStatus(requestDto.getStatus());
+                // promoCode.get().setStatus(requestDto.isStatus());
+                promoCode.get().setStartDate(requestDto.getStartDate());
+                // promoCode.get().setStatus(requestDto.getStatus());
 
 
-            return modelMapper.map(promoCodeRepository.save(promoCode.get()),PromoCodeResponseDto.class);
+                 modelMapper.map(promoCodeRepository.save(promoCode.get()),PromoCodeResponseDto.class);
+            }else {
+                throw new RuntimeException("PromoCode tapilmadi");
+            }
         }
-        throw new RuntimeException("PromoCode tapilmadi") ;
+        return null;
+
     }
 
     @Override

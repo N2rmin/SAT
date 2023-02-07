@@ -11,4 +11,7 @@ public class ModuleResponseDto {
     private SectionResponseDto section;
 
     private int duration;
+
+    private int numberOfQuestion;
+
 }

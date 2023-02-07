@@ -182,7 +182,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public QuestionResponseDto getQuestionForExam(Long quizId, Long moduleId, int orderNumber, boolean answer) {
+    public QuestionResponseDto getQuestionForExam(Long quizId, Long moduleId, int orderNumber) {
         System.out.println("1111");
         Question question;
 
@@ -194,10 +194,10 @@ public class QuestionServiceImpl implements QuestionService {
 
         question.setAnswers(answers);
 
-        if (!answer){
-            System.out.println(answer);
-            question.getAnswers().forEach(answer1 -> answer1.setIsTrue(null));
-        }
+
+        QuestionResponseDto  questionResponseDto=  modelMapper.map(question, QuestionResponseDto.class) ;
+        questionResponseDto.getAnswers().forEach(answer1 -> answer1.setIsTrue(null));
+
 
         System.out.println("5555");
           //  QuestionResponseDto questionResponseDto= modelMapper.map(question, QuestionResponseDto.class);
@@ -209,7 +209,7 @@ public class QuestionServiceImpl implements QuestionService {
       //  System.out.println(question);
        // System.out.println("3333");
 
-        return modelMapper.map(question, QuestionResponseDto.class);
+        return questionResponseDto;
     }
 
     @Override
@@ -222,6 +222,36 @@ public class QuestionServiceImpl implements QuestionService {
         System.out.println(orderNumbers);
         System.out.println("33333");
         return orderNumbers;
+    }
+
+    @Override
+    public QuestionResponseDto getQuestionWithAnswer(Long quizId, Long moduleId, int orderNumber) {
+        System.out.println("1111");
+        Question question;
+
+        question=questionRepository.findByQuizIdAndModuleIdAndOrderNumber(quizId,moduleId,orderNumber);
+
+
+
+        TreeSet<Answer> answers= new TreeSet<>(question.getAnswers());
+
+        question.setAnswers(answers);
+
+
+
+
+
+        System.out.println("5555");
+        //  QuestionResponseDto questionResponseDto= modelMapper.map(question, QuestionResponseDto.class);
+
+
+
+        //  System.out.println("22222");
+
+        //  System.out.println(question);
+        // System.out.println("3333");
+
+        return modelMapper.map(question, QuestionResponseDto.class);
     }
 
 

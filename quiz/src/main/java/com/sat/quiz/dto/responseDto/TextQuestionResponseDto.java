@@ -11,6 +11,7 @@ public class TextQuestionResponseDto {
     private Long id;
     private String textContent;
     private boolean status;
+    private Boolean isText;
 
    // private List<QuestionResponseDto> questions;
 
