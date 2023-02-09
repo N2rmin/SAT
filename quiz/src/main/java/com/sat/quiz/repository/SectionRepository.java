@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SectionRepository extends JpaRepository<Section,Long> {
-   // @EntityGraph(attributePaths = {"modules"})
+    @EntityGraph(attributePaths = {"modules"})
     List<Section> findAll();
 
- //   @EntityGraph(attributePaths = {"modules"})
+   @EntityGraph(attributePaths = {"modules"})
     Optional<Section> findById(Long id);
 }

@@ -80,16 +80,21 @@ public class ResultServiceImpl implements ResultService {
             answerId=entry.getValue();
 
 
-
            Answer answer= answerRepository.findByVariantIdAndQuestionOrderNumberAndQuestionModuleIdAndQuestionQuizId(answerId,questionId, requestDto.getModuleId(), requestDto.getQuizId());
-           if(answer.getIsTrue()){
+
+            System.out.println("111111");
+
+            if(answer.getIsTrue()){
                score++;
+                System.out.println("22222");
            }
+            System.out.println("33333");
+
 
 
 
         }
-
+        System.out.println("4444");
         result.setScore(score);
      //   result.setUsername(requestDto.getUsername());
 

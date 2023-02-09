@@ -1,6 +1,7 @@
 package com.sat.quiz.service.impl;
 
 import com.sat.quiz.dto.requestDto.SectionRequestDto;
+import com.sat.quiz.dto.responseDto.SectionModuleResponseDto;
 import com.sat.quiz.dto.responseDto.SectionResponseDto;
 import com.sat.quiz.entity.Section;
 import com.sat.quiz.repository.SectionRepository;
@@ -42,10 +43,10 @@ public class SectionServiceImpl implements SectionService {
     }
 
     @Override
-    public SectionResponseDto getSection(Long id) {
+    public SectionModuleResponseDto getSection(Long id) {
         Optional<Section> section = sectionRepository.findById(id);
         if(section.isPresent()){
-            return modelMapper.map(section.get(),SectionResponseDto.class);
+            return modelMapper.map(section.get(),SectionModuleResponseDto.class);
         }
         throw new RuntimeException("Section tapilmadi") ;
     }

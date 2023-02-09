@@ -1,6 +1,7 @@
 package com.sat.quiz.service;
 
 import com.sat.quiz.dto.requestDto.SectionRequestDto;
+import com.sat.quiz.dto.responseDto.SectionModuleResponseDto;
 import com.sat.quiz.dto.responseDto.SectionResponseDto;
 import com.sat.quiz.entity.Section;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ public interface SectionService {
 
     List<SectionResponseDto> getSections();
 
-    SectionResponseDto getSection(Long id);
+    SectionModuleResponseDto getSection(Long id);
 
     Section getSectionSelf(Long id);
     SectionResponseDto updateSection(Long id, SectionRequestDto requestDto);

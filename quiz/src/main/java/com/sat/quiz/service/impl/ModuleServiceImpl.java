@@ -4,6 +4,7 @@ import com.sat.quiz.dto.TextQuestionDtoTest;
 import com.sat.quiz.dto.mapper;
 import com.sat.quiz.dto.requestDto.ModuleRequestDto;
 import com.sat.quiz.dto.responseDto.ModuleResponseDto;
+import com.sat.quiz.dto.responseDto.ModuleSectionResponseDto;
 import com.sat.quiz.dto.responseDto.SectionResponseDto;
 import com.sat.quiz.entity.Module;
 import com.sat.quiz.entity.Section;
@@ -99,5 +100,18 @@ public class ModuleServiceImpl implements ModuleService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<ModuleSectionResponseDto> getModulesBySectionId(Long sectionId) {
+        List<ModuleSectionResponseDto> list = new ArrayList<>();
+        System.out.println(sectionId);
+
+        moduleRepository.findAllBySectionId(sectionId).stream().forEach(obj->{
+            list.add(modelMapper.map(obj,ModuleSectionResponseDto.class));
+        });
+        System.out.println(list.get(1));
+        return list;
+
     }
 }

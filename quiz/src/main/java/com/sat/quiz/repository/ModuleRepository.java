@@ -15,4 +15,7 @@ public interface ModuleRepository  extends JpaRepository<Module,Long> {
 
     @EntityGraph(attributePaths = {"section"})
     Optional<Module> findById(Long id);
+
+    @EntityGraph(attributePaths = {"section"})
+    Optional<Module> findAllBySectionId(Long sectionId);
 }

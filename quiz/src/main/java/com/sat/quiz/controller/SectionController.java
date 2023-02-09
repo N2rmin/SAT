@@ -1,6 +1,7 @@
 package com.sat.quiz.controller;
 
 import com.sat.quiz.dto.requestDto.SectionRequestDto;
+import com.sat.quiz.dto.responseDto.SectionModuleResponseDto;
 import com.sat.quiz.dto.responseDto.SectionResponseDto;
 import com.sat.quiz.service.SectionService;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +32,8 @@ public class SectionController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<SectionResponseDto> getSection(@PathVariable("id") Long id){
-        SectionResponseDto sectionResponseDto= sectionService.getSection(id);
+    public ResponseEntity<SectionModuleResponseDto> getSection(@PathVariable("id") Long id){
+        SectionModuleResponseDto sectionResponseDto= sectionService.getSection(id);
         return ResponseEntity.ok(sectionResponseDto);
     }
 

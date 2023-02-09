@@ -2,6 +2,7 @@ package com.sat.quiz.controller;
 
 import com.sat.quiz.dto.requestDto.ModuleRequestDto;
 import com.sat.quiz.dto.responseDto.ModuleResponseDto;
+import com.sat.quiz.dto.responseDto.ModuleSectionResponseDto;
 import com.sat.quiz.service.ModuleService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,13 @@ public class ModuleController {
     @GetMapping
     public ResponseEntity<List<ModuleResponseDto>> getModules(){
         List<ModuleResponseDto> moduleResponseDtos =moduleService.getModules();
+        return ResponseEntity.ok(moduleResponseDtos);
+    }
+
+
+    @GetMapping("/bySectionId/{sectionId}")
+    public ResponseEntity<List<ModuleSectionResponseDto>> getModulesBySectionId(@PathVariable("sectionId") Long sectionId){
+        List<ModuleSectionResponseDto> moduleResponseDtos =moduleService.getModulesBySectionId(sectionId);
         return ResponseEntity.ok(moduleResponseDtos);
     }
 
