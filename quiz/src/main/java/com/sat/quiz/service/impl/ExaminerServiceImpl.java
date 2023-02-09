@@ -62,7 +62,9 @@ if (promoCode1.getStartDate().compareTo(new Date())>0) {
 //        examiner.setLastName(requestDto.getLastName());
 //        examiner.setPromoCode(requestDto.getPromoCode());
 
-    }
+    }else{
+    promoCode1.setStatus(false);
+}
 
     //   examinerRepository.save(examiner);
 
