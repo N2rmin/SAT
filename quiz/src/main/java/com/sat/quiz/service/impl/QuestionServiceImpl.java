@@ -61,6 +61,7 @@ public class QuestionServiceImpl implements QuestionService {
         question.setQuestionText(requestDto.getQuestionText());
         question.setStatus(requestDto.isStatus());
         question.setOrderNumber(requestDto.getOrderNumber());
+        question.setIsOpen(requestDto.getIsOpen());
         questionRepository.save(question);
         return modelMapper.map(question, QuestionResponseDto.class);
 
@@ -159,6 +160,8 @@ public class QuestionServiceImpl implements QuestionService {
        // question.setTextQuestionId(requestDto.getTextQuestionId());
         question.setQuestionText(requestDto.getQuestionText());
         question.setStatus(requestDto.isStatus());
+        question.setIsOpen(requestDto.getIsOpen());
+
         questionRepository.save(question);
         return modelMapper.map(question, QuestionResponseDto.class);
     }
