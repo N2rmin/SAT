@@ -21,4 +21,7 @@ public interface AnswerRepository extends JpaRepository<Answer,Long> {
     Answer findByIdAndQuestion_Id(Long id,Long questionId);
 
     Answer findByVariantIdAndQuestionOrderNumberAndQuestionModuleIdAndQuestionQuizId(Long id, int orderNumber,Long moduleId, Long quizId );
+
+    Answer findByQuestionOrderNumberAndQuestionModuleIdAndQuestionQuizId(int orderNumber,Long moduleId, Long quizId );
+
 }

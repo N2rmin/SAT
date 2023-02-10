@@ -23,6 +23,7 @@ public class QuestionResponseDto {
     private int orderNumber;
     // private List<String> textQuestionContext;
      private TextQuestionResponseDto textQuestion;
+    private Boolean isOpen;
     private QuizResponseDto quiz;
     private List<AnswerResponseDto> answers;
 

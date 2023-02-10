@@ -10,6 +10,7 @@ public class ResultRequestDto {
 
 
     private Map<Integer,Long> questionAnswer;
+    private Map<Integer, String> openQuestionAnswer;
 //    private Long questionId;
     private Long quizId;
 

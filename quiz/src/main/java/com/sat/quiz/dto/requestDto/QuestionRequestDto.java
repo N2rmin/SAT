@@ -9,6 +9,7 @@ public class QuestionRequestDto {
     private String questionText;
     private int orderNumber;
     private boolean status;
+    private Boolean isOpen;
     private Long moduleId;
     private Long quizId;
     private Long textQuestionId;

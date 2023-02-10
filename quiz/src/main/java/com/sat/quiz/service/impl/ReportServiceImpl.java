@@ -96,6 +96,7 @@ System.out.println("33333333333");
 
 
         usersAnswersReportResponseDto.setUserAnswerId(usersAnswers.getUserVariantId());
+        usersAnswersReportResponseDto.setUserOpenAnswer(usersAnswers.getOpenAnswer());
         System.out.println("555555555");
 
         //  System.out.println("22222");

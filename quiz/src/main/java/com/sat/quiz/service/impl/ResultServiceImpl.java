@@ -80,14 +80,37 @@ public class ResultServiceImpl implements ResultService {
             answerId=entry.getValue();
 
 
+
            Answer answer= answerRepository.findByVariantIdAndQuestionOrderNumberAndQuestionModuleIdAndQuestionQuizId(answerId,questionId, requestDto.getModuleId(), requestDto.getQuizId());
 
-            System.out.println("111111");
+            System.out.println(answer.getId());
 
             if(answer.getIsTrue()){
                score++;
                 System.out.println("22222");
            }
+            System.out.println("33333");
+
+
+
+
+        }
+
+        String answerText;
+        for(Map.Entry<Integer,String> entry:requestDto.getOpenQuestionAnswer().entrySet()){
+            System.out.println(entry);
+            questionId=entry.getKey();
+            answerText=entry.getValue();
+
+
+            Answer answer= answerRepository.findByQuestionOrderNumberAndQuestionModuleIdAndQuestionQuizId(questionId, requestDto.getModuleId(), requestDto.getQuizId());
+
+            System.out.println("111111");
+
+            if(answerText.equals(answer.getAnswerText())){
+                score++;
+                System.out.println("22222");
+            }
             System.out.println("33333");
 
 
@@ -124,6 +147,20 @@ public class ResultServiceImpl implements ResultService {
                 usersAnswersRepository.save(usersAnswers);
             }
 
+        for (Map.Entry<Integer,String> entry:requestDto.getOpenQuestionAnswer().entrySet()){
+            UsersAnswers usersAnswers= new UsersAnswers();
+
+            usersAnswers.setResult(result);
+            questionId=entry.getKey();
+            answerText=entry.getValue();
+
+            usersAnswers.setOpenAnswer(answerText);
+            usersAnswers.setOrderNumber(questionId);
+            System.out.println(questionId);
+            System.out.println(answerText);
+
+            usersAnswersRepository.save(usersAnswers);
+        }
 
 
 

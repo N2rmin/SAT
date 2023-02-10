@@ -20,5 +20,6 @@ public class UsersAnswersReportResponseDto {
     private QuizResponseDto quiz;
     private List<AnswerResponseDto> answers;
     private Long userAnswerId;
+    private String userOpenAnswer;
 
 }

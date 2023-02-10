@@ -29,6 +29,7 @@ public class Question extends BaseEntity{
 
 
     private int orderNumber;
+    private Boolean isOpen;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "module_id")

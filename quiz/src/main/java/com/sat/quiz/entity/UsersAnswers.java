@@ -24,6 +24,7 @@ public class UsersAnswers {
 
     private int orderNumber;
 
+    private String openAnswer;
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "result_id", referencedColumnName = "id" )
