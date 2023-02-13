@@ -52,7 +52,7 @@ public class ExaminerServiceImpl implements ExaminerService {
 
 
          System.out.println(promoCode1.getStartDate().compareTo(new Date()));
-if (promoCode1.getStartDate().compareTo(new Date())>0) {
+if (promoCode1.getStartDate().compareTo(new Date())>0 && promoCode1.getEndDate().compareTo(new Date())<0) {
 
     System.out.println("Imtahan hele aktiv deyil");
     throw new Exception("Imtahan hele aktiv deyil");

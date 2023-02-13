@@ -28,6 +28,10 @@ public class PromoCode {
     @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
 
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date endDate;
+
     private Boolean status;
 
 

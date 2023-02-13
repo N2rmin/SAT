@@ -21,7 +21,9 @@ public interface PromoCodeService {
 
     Boolean deletePromoCode(Long id);
 
-   // List<PromoCodeResponseDto> getPromoCodeWithModule(Long id);
+    List<PromoCodeResponseDto> checkPromoCode(String promoCode) throws Exception;
+
+    // List<PromoCodeResponseDto> getPromoCodeWithModule(Long id);
 
   //  List<PromoCodeResponseDto> getPromoCodeWithText(Long id);
 

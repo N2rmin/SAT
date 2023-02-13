@@ -22,8 +22,8 @@ public class QuestionResponseDto {
     private ModuleResponseDto module;
     private int orderNumber;
     // private List<String> textQuestionContext;
-     private TextQuestionResponseDto textQuestion;
-    private boolean isOpen;
+    private TextQuestionResponseDto textQuestion;
+    private Boolean isOpen;
     private QuizResponseDto quiz;
     private List<AnswerResponseDto> answers;
 

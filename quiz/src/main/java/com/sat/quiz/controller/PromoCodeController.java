@@ -40,6 +40,12 @@ public class PromoCodeController {
         return ResponseEntity.ok(promoCodeResponseDtos);
     }
 
+    @GetMapping("check/{promoCode}")
+    public ResponseEntity<List<PromoCodeResponseDto>> checkPromoCode(@PathVariable("promoCode") String promoCode ){
+        List<PromoCodeResponseDto> promoCodeResponseDtos =promoCodeService.checkPromoCode(promoCode);
+        return ResponseEntity.ok(promoCodeResponseDtos);
+    }
+
   /*  @GetMapping("/withAnswers")
     public ResponseEntity<List<PromoCodeResponseDto>> getPromoCodesWithAnswer(){
         List<PromoCodeResponseDto> promoCodeResponseDtos =promoCodeService.getPromoCodesWithAnswer();

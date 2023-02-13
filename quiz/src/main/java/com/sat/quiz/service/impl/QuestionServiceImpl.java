@@ -201,6 +201,18 @@ public class QuestionServiceImpl implements QuestionService {
         QuestionResponseDto  questionResponseDto=  modelMapper.map(question, QuestionResponseDto.class) ;
         questionResponseDto.getAnswers().forEach(answer1 -> answer1.setIsTrue(null));
 
+        System.out.println(question.getIsOpen());
+       // System.out.println(questionResponseDto.geti());
+
+        System.out.println("Ner");
+        if (questionResponseDto.getIsOpen()){
+            System.out.println("n");
+            questionResponseDto.getAnswers().forEach(answer1 -> answer1.setAnswerText(null));
+            System.out.println("min");
+        }
+
+        System.out.println("22222");
+
 
         System.out.println("5555");
           //  QuestionResponseDto questionResponseDto= modelMapper.map(question, QuestionResponseDto.class);

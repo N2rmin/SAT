@@ -87,9 +87,9 @@ public class ResultServiceImpl implements ResultService {
 
             if(answer.getIsTrue()){
                score++;
-                System.out.println("22222");
+                System.out.println("2");
            }
-            System.out.println("33333");
+            System.out.println("22");
 
 
 
@@ -98,26 +98,28 @@ public class ResultServiceImpl implements ResultService {
 
         String answerText;
         for(Map.Entry<Integer,String> entry:requestDto.getOpenQuestionAnswer().entrySet()){
+            System.out.println("minn");
             System.out.println(entry);
             questionId=entry.getKey();
             answerText=entry.getValue();
 
 
             Answer answer= answerRepository.findByQuestionOrderNumberAndQuestionModuleIdAndQuestionQuizId(questionId, requestDto.getModuleId(), requestDto.getQuizId());
+            System.out.println("min");
 
-            System.out.println("111111");
+            System.out.println("1");
 
             if(answerText.equals(answer.getAnswerText())){
                 score++;
-                System.out.println("22222");
+                System.out.println("11");
             }
-            System.out.println("33333");
+            System.out.println("111");
 
 
 
 
         }
-        System.out.println("4444");
+        System.out.println("1111");
         result.setScore(score);
      //   result.setUsername(requestDto.getUsername());
 
@@ -128,7 +130,12 @@ public class ResultServiceImpl implements ResultService {
         result.setStatus(requestDto.getStatus());
 
 
-        resultRepository.save(result);
+        try{
+            resultRepository.save(result);}
+        catch (Exception e)
+        {
+            throw new DataIntegrityViolationException("Bir user eyni modulue yeniden imtahan vere bilmez");
+        }
 
         System.out.println(result.getId());
 

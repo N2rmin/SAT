@@ -79,6 +79,7 @@ public class PromoCodeServiceImpl implements PromoCodeService {
 
                 // promoCode.get().setStatus(requestDto.isStatus());
                 promoCode.get().setStartDate(requestDto.getStartDate());
+                promoCode.get().setEndDate(requestDto.getEndDate());
                 // promoCode.get().setStatus(requestDto.getStatus());
 
 
@@ -100,6 +101,34 @@ public class PromoCodeServiceImpl implements PromoCodeService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<PromoCodeResponseDto> checkPromoCode(String promoCode) throws Exception {
+
+        PromoCode promoCode1=promoCodeRepository.findByPromoCode(promoCode);
+
+
+//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+//
+//
+//        LocalDateTime now = LocalDateTime.now();
+//        System.out.println(dtf.format(now));
+
+
+
+        System.out.println(promoCode1.getStartDate().compareTo(new Date()));
+        if (promoCode1.getStartDate().compareTo(new Date())>0 && promoCode1.getEndDate().compareTo(new Date())<0) {
+
+            System.out.println("Imtahan hele aktiv deyil");
+            throw new Exception("Imtahan hele aktiv deyil");
+            //  examiner.setCreatedDate(new Date());
+            //examiner.setCreatedBy("Narmin");
+//        examiner.setName(requestDto.getName());
+//        examiner.setLastName(requestDto.getLastName());
+//        examiner.setPromoCode(requestDto.getPromoCode());
+        }
+            return null;
     }
 
 
