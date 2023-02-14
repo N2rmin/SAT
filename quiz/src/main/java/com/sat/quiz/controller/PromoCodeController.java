@@ -41,7 +41,7 @@ public class PromoCodeController {
     }
 
     @GetMapping("check/{promoCode}")
-    public ResponseEntity<List<PromoCodeResponseDto>> checkPromoCode(@PathVariable("promoCode") String promoCode ){
+    public ResponseEntity<List<PromoCodeResponseDto>> checkPromoCode(@PathVariable("promoCode") String promoCode ) throws Exception {
         List<PromoCodeResponseDto> promoCodeResponseDtos =promoCodeService.checkPromoCode(promoCode);
         return ResponseEntity.ok(promoCodeResponseDtos);
     }
