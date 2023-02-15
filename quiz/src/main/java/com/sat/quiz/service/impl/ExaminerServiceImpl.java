@@ -13,6 +13,7 @@ import com.sat.quiz.repository.PromoCodeRepository;
 import com.sat.quiz.service.ExaminerService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -51,8 +52,8 @@ public class ExaminerServiceImpl implements ExaminerService {
 
 
 
-         System.out.println(promoCode1.getStartDate().compareTo(new Date()));
-if (promoCode1.getStartDate().compareTo(new Date())>0 && promoCode1.getEndDate().compareTo(new Date())<0) {
+
+if (promoCode1.getStartDate().compareTo(new Date())>0 || promoCode1.getEndDate().compareTo(new Date())<0) {
 
     System.out.println("Imtahan hele aktiv deyil");
     throw new Exception("Imtahan hele aktiv deyil");
@@ -63,13 +64,26 @@ if (promoCode1.getStartDate().compareTo(new Date())>0 && promoCode1.getEndDate()
 //        examiner.setPromoCode(requestDto.getPromoCode());
 
     }else{
+
     promoCode1.setStatus(false);
+    try{ examinerRepository.save(examiner);}
+    catch (Exception e)
+    {
+        throw new DataIntegrityViolationException("Promocode artiq istifade olunmusdur.");
+    }
+
+
+    ExaminerResponseDto examinerResponseDto = modelMapper.map(examiner, ExaminerResponseDto.class);
+    System.out.println(promoCode1.getEndDate());
+    examinerResponseDto.setEndTime(promoCode1.getEndDate());
+
+    return examinerResponseDto ;
 }
 
     //   examinerRepository.save(examiner);
 
 
-        return  modelMapper.map(examinerRepository.save(examiner), ExaminerResponseDto.class);
+
 
        // return modelMapper.map(examiner,ExaminerResponseDto.class );
     }

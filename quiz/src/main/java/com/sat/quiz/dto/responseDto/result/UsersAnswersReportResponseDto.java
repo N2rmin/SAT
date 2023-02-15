@@ -10,6 +10,7 @@ import java.util.List;
 
 @Data
 public class UsersAnswersReportResponseDto {
+
     private Long id;
     private String questionText;
     //  private Long textQuestionId;
@@ -19,7 +20,13 @@ public class UsersAnswersReportResponseDto {
     private TextQuestionResponseDto textQuestion;
     private QuizResponseDto quiz;
     private List<AnswerResponseDto> answers;
+    private Boolean isOpen;
+
     private Long userAnswerId;
     private String userOpenAnswer;
+
+    private String name;
+    private String lastName;
+
 
 }

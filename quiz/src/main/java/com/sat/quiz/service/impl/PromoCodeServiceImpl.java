@@ -4,11 +4,16 @@ import com.sat.quiz.dto.requestDto.PromoCodeDate;
 import com.sat.quiz.dto.requestDto.PromoCodeId;
 import com.sat.quiz.dto.requestDto.PromoCodeRequestDto;
 import com.sat.quiz.dto.responseDto.PromoCodeResponseDto;
+import com.sat.quiz.entity.Examiner;
 import com.sat.quiz.entity.PromoCode;
+import com.sat.quiz.entity.Result;
+import com.sat.quiz.repository.ExaminerRepository;
 import com.sat.quiz.repository.PromoCodeRepository;
+import com.sat.quiz.repository.ResultRepository;
 import com.sat.quiz.service.PromoCodeService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -20,6 +25,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PromoCodeServiceImpl implements PromoCodeService {
     private final PromoCodeRepository promoCodeRepository;
+
+    private final ExaminerRepository examinerRepository;
+    private  final ResultRepository resultRepository;
     private final ModelMapper modelMapper;
 
 
@@ -47,9 +55,9 @@ public class PromoCodeServiceImpl implements PromoCodeService {
     public List<PromoCodeResponseDto> getPromoCodes(Boolean isUsed) {
         List<PromoCode> promoCodes;
         if (isUsed){
-                promoCodes=promoCodeRepository.findTopByIdAndStartDateIsNotNull(50L);
+                promoCodes=promoCodeRepository.findTopByIdAndStatusTrueAndStartDateIsNotNull(50L);
     }else {
-            promoCodes=promoCodeRepository.findFirst50AndStartDateIsNullByOrderByIdAsc();
+            promoCodes=promoCodeRepository.findFirst50AndStatusTrueAndStartDateIsNullByOrderByIdAsc();
         }
 
         List<PromoCodeResponseDto> promoCodeResponseDtos=promoCodes.stream().map(promoCode -> modelMapper.map(promoCode,PromoCodeResponseDto.class)).collect(Collectors.toList());
@@ -104,7 +112,7 @@ public class PromoCodeServiceImpl implements PromoCodeService {
     }
 
     @Override
-    public List<PromoCodeResponseDto> checkPromoCode(String promoCode) throws Exception {
+    public List<PromoCodeResponseDto> checkPromoCode(String promoCode, Long moduleId) throws Exception {
 
         PromoCode promoCode1=promoCodeRepository.findByPromoCode(promoCode);
 
@@ -118,7 +126,7 @@ public class PromoCodeServiceImpl implements PromoCodeService {
 
 
         System.out.println(promoCode1.getStartDate().compareTo(new Date()));
-        if (promoCode1.getStartDate().compareTo(new Date())>0 && promoCode1.getEndDate().compareTo(new Date())<0) {
+        if (promoCode1.getStartDate().compareTo(new Date())>0 || promoCode1.getEndDate().compareTo(new Date())<0) {
 
             System.out.println("Imtahan hele aktiv deyil");
             throw new Exception("Imtahan hele aktiv deyil");
@@ -128,7 +136,20 @@ public class PromoCodeServiceImpl implements PromoCodeService {
 //        examiner.setLastName(requestDto.getLastName());
 //        examiner.setPromoCode(requestDto.getPromoCode());
         }
-            return null;
+
+
+            Examiner examiner= examinerRepository.findByPromoCode(promoCode);
+            Result result = resultRepository.findByExaminerIdAndModuleId(examiner.getId(),moduleId);
+            if (result != null){
+                throw new DataIntegrityViolationException("Bir user eyni modulue yeniden imtahan vere bilmez");
+            }
+
+
+
+
+
+
+        return null;
     }
 
 

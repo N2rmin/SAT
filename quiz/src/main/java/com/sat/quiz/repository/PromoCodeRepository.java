@@ -14,9 +14,9 @@ public interface PromoCodeRepository extends JpaRepository<PromoCode,Long> {
 
 PromoCode findByPromoCode(String promoCode);
 
-    @Query(value = "select * from promo_code where promo_code .start_date is not null  order by id asc limit 50\n", nativeQuery = true)
-    List<PromoCode> findTopByIdAndStartDateIsNotNull(Long id);
-    @Query(value = "select * from promo_code where promo_code .start_date isnull  order by id asc limit 50", nativeQuery = true)
-    List<PromoCode> findFirst50AndStartDateIsNullByOrderByIdAsc();
+    @Query(value = "select * from promo_code where promo_code .start_date is not null and status=true order by id asc limit 50", nativeQuery = true)
+    List<PromoCode> findTopByIdAndStatusTrueAndStartDateIsNotNull(Long id);
+    @Query(value = "select * from promo_code where promo_code .start_date isnull  and status=true order by id asc limit 50", nativeQuery = true)
+    List<PromoCode> findFirst50AndStatusTrueAndStartDateIsNullByOrderByIdAsc();
 
 }

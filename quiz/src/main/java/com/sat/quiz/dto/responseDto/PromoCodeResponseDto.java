@@ -15,6 +15,7 @@ public class PromoCodeResponseDto {
 
     private Date startDate;
 
+    
     private Date endDate;
 
     private Boolean status;
