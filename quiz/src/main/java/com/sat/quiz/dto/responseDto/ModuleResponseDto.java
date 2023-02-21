@@ -10,7 +10,6 @@ public class ModuleResponseDto {
     private String name;
     private SectionResponseDto section;
 
-    private int duration;
 
     private int numberOfQuestion;
 

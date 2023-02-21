@@ -2,8 +2,12 @@ package com.sat.quiz.controller;
 
 import com.sat.quiz.dto.requestDto.VariantRequestDto;
 import com.sat.quiz.dto.responseDto.QuestionResponseDto;
+import com.sat.quiz.dto.responseDto.ResultResponseDto;
 import com.sat.quiz.dto.responseDto.VariantResponseDto;
+import com.sat.quiz.dto.responseDto.result.UserScoreReportResponseDto;
+import com.sat.quiz.dto.responseDto.result.UsersAnswersCountReportResponseDto;
 import com.sat.quiz.dto.responseDto.result.UsersAnswersReportResponseDto;
+import com.sat.quiz.entity.Result;
 import com.sat.quiz.service.ReportService;
 import com.sat.quiz.service.VariantService;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +37,7 @@ public class ReportController {
 
     @Transactional
     @GetMapping("userAnswer/{quizId}/{moduleId}/{orderNumber}/{promoCode}")
-    public ResponseEntity<UsersAnswersReportResponseDto> getQuestionForExam(
+    public ResponseEntity<UsersAnswersReportResponseDto> getUserAnswers(
             @PathVariable("quizId") Long quizId,
             @PathVariable("moduleId") Long moduleId,
                                                                             @PathVariable("orderNumber") int orderNumber,
@@ -42,6 +46,18 @@ public class ReportController {
         UsersAnswersReportResponseDto usersAnswersReportResponseDto =reportService.getUserAnswers(quizId,moduleId,orderNumber,promoCode);
         return ResponseEntity.ok(usersAnswersReportResponseDto);
     }
+
+
+    @Transactional
+    @GetMapping("userAnswer/{quizId}/{promoCode}")
+    public ResponseEntity<UserScoreReportResponseDto> getUserCorrectAnswerCount(
+            @PathVariable("quizId") Long quizId,
+
+            @PathVariable("promoCode") String promoCode){
+        UserScoreReportResponseDto usersAnswersReportResponseDto =reportService.getUserCorrectAnswerCount(quizId,promoCode);
+        return ResponseEntity.ok(usersAnswersReportResponseDto);
+    }
+
 
 //    private final VariantService variantService;
 //

@@ -37,6 +37,7 @@ public class ResultServiceImpl implements ResultService {
     private  final ResultRepository resultRepository;
     private final QuizService quizService;
 
+    private final ModuleService moduleService;
     private final ExaminerServiceImpl examinerService;
 
     private final UsersAnswersRepository usersAnswersRepository;
@@ -65,9 +66,15 @@ public class ResultServiceImpl implements ResultService {
         Examiner examiner= examinerService.getExaminerSelf(requestDto.getExaminerId());
         result.setExaminer(examiner);
 
-        result.setModuleId(requestDto.getModuleId());
+        if (requestDto.getModuleId()==null){
+            throw  new IllegalArgumentException("result at least one moldule");
+        }
 
-    //    LinkedHashSet<Long> answerIds= new LinkedHashSet<>();
+        Module module= moduleService.getModuleSelf(requestDto.getModuleId());
+        result.setModule(module);
+
+
+        //    LinkedHashSet<Long> answerIds= new LinkedHashSet<>();
     //    LinkedHashSet<Long> questionIds= new LinkedHashSet<>();
 
 

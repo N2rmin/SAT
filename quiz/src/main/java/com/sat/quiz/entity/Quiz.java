@@ -14,7 +14,7 @@ public class Quiz extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private boolean status;
+    private Boolean status;
 
 
 

@@ -1,33 +1,36 @@
 package com.sat.quiz.service.impl;
 
-import com.sat.quiz.dto.requestDto.VariantRequestDto;
-import com.sat.quiz.dto.responseDto.QuestionResponseDto;
-import com.sat.quiz.dto.responseDto.VariantResponseDto;
+import com.sat.quiz.dto.responseDto.ExaminerResponseDto;
+import com.sat.quiz.dto.responseDto.ModuleResponseDto;
+import com.sat.quiz.dto.responseDto.ResultResponseDto;
+import com.sat.quiz.dto.responseDto.result.UserScoreReportResponseDto;
+import com.sat.quiz.dto.responseDto.result.UsersAnswersCountReportResponseDto;
 import com.sat.quiz.dto.responseDto.result.UsersAnswersReportResponseDto;
 import com.sat.quiz.entity.Answer;
 import com.sat.quiz.entity.Examiner;
 import com.sat.quiz.entity.Question;
 import com.sat.quiz.entity.Result;
 import com.sat.quiz.entity.UsersAnswers;
-import com.sat.quiz.entity.Variant;
 import com.sat.quiz.repository.ExaminerRepository;
+import com.sat.quiz.repository.ModuleRepository;
 import com.sat.quiz.repository.QuestionRepository;
 import com.sat.quiz.repository.ResultRepository;
 import com.sat.quiz.repository.UsersAnswersRepository;
-import com.sat.quiz.repository.VariantRepository;
 import com.sat.quiz.service.ModuleService;
 import com.sat.quiz.service.QuizService;
 import com.sat.quiz.service.ReportService;
 import com.sat.quiz.service.TextQuestionService;
-import com.sat.quiz.service.VariantService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 @RequiredArgsConstructor
@@ -41,7 +44,7 @@ public class ReportServiceImpl implements ReportService {
 
     private final ResultRepository resultRepository;
 
-
+private final ModuleRepository moduleRepository;
     private final UsersAnswersRepository usersAnswersRepository;
     private final QuizService quizService;
 
@@ -112,5 +115,45 @@ System.out.println("33333333333");
     @Override
     public Boolean deleteUerAnswerReport(Long id) {
         return null;
+    }
+
+    @Override
+    public  UserScoreReportResponseDto getUserCorrectAnswerCount(Long quizId, String promoCode) {
+
+        Collection<Long>  ids=moduleRepository.findId();
+
+
+        Examiner examiner = examinerRepository.findByPromoCode(promoCode);
+       // List<Result> results= resultRepository.findByExaminerIdAndModuleIdInAndQuizId(examiner.getId(),longs,1L);
+
+        System.out.println("terdst");
+
+        System.out.println("---");
+
+        UserScoreReportResponseDto userScoreReportResponseDto = modelMapper.map(examiner, UserScoreReportResponseDto.class);
+        userScoreReportResponseDto.setExaminer(modelMapper.map(examiner, ExaminerResponseDto.class));
+
+        List<UsersAnswersCountReportResponseDto> list = new ArrayList<>();
+
+
+
+
+     resultRepository.findByExaminerIdAndModuleIdInAndQuizId(examiner.getId(),ids,  quizId).stream().forEach(obj->{
+         list.add(modelMapper.map(obj,UsersAnswersCountReportResponseDto.class));
+             });
+
+     userScoreReportResponseDto.setUsersAnswersCountReportResponseDtos(list);
+        System.out.println("1111---");
+
+    /*    System.out.println(results.size());
+        for (int i=0;i<results.size();i++){
+            System.out.println(results.get(i).getId());
+        }*/
+
+        System.out.println("1111");
+
+
+
+        return userScoreReportResponseDto;
     }
 }

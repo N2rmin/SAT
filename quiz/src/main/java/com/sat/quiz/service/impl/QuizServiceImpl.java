@@ -77,7 +77,7 @@ public class QuizServiceImpl implements QuizService {
         Optional<Quiz> quiz=quizRepository.findById(id);
 
         if(quiz.isPresent()){
-            quizRepository.deleteById(id);
+            quiz.get().setStatus(false);
             return true;
         }
         return false;

@@ -96,7 +96,8 @@ public class ModuleServiceImpl implements ModuleService {
         Optional<Module> module=moduleRepository.findById(id);
 
         if(module.isPresent()){
-            moduleRepository.deleteById(id);
+            module.get().setStatus(false);
+
             return true;
         }
         return false;
